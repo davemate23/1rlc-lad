@@ -1,0 +1,70 @@
+<%= form_for(@employee) do |f| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% @employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :service_no %><br>
+    <%= f.text_field :service_no %>
+  </div>
+  <div class="field">
+    <%= f.label :date_of_birth %><br>
+    <%= f.date_select :date_of_birth %>
+  </div>
+    <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.text_field :gender %>
+  </div>
+    <div class="field">
+    <%= f.label :service_start_date %><br>
+    <%= f.date_select :service_start_date %>
+  </div>
+    <div class="field">
+    <%= f.label :substantive_rank %><br>
+    <%= f.text_field :substantive_rank %>
+  </div>
+    <div class="field">
+    <%= f.label :promotion_date %><br>
+    <%= f.date_select :promotion_date %>
+  </div>
+    <div class="field">
+    <%= f.label :passport_number %><br>
+    <%= f.text_field :passport_number %>
+  </div>
+    <div class="field">
+    <%= f.label :passport_expiry %><br>
+    <%= f.date_select :passport_expiry %>
+  </div>
+    <div class="field">
+    <%= f.label :passport_country_of_origin %><br>
+    <%= f.text_field :passport_country_of_origin %>
+  </div>
+    <div class="field">
+    <%= f.label :nationality %><br>
+    <%= f.text_field :nationality %>
+  </div>
+    <div class="field">
+    <%= f.label :national_insurance %><br>
+    <%= f.text_field :national_insurance %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @employee.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @employee.last_name %>
+</p>
+
+<p>
+  <strong>Service no:</strong>
+  <%= @employee.service_no %>
+</p>
+
+<p>
+  <strong>Date of birth:</strong>
+  <%= @employee.date_of_birth %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @employee.gender %>
+</p>
+
+<p>
+  <strong>Service Start Date:</strong>
+  <%= @employee.service_start_date %>
+</p>
+
+<p>
+  <strong>Substantive Rank:</strong>
+  <%= @employee.substantive_rank %>
+</p>
+
+<p>
+  <strong>Promotion Date:</strong>
+  <%= @employee.promotion_date %>
+</p>
+
+<p>
+  <strong>Passport Number:</strong>
+  <%= @employee.passport_number %>
+</p>
+
+<p>
+  <strong>Passport Expiry Date:</strong>
+  <%= @employee.passport_expiry %>
+</p>
+
+<p>
+  <strong>Passport Country of Origin:</strong>
+  <%= @employee.passport_country_of_origin %>
+</p>
+
+<p>
+  <strong>Nationality:</strong>
+  <%= @employee.nationality %>
+</p>
+
+<p>
+  <strong>National Insurance No:</strong>
+  <%= @employee.national_insurance %>
+</p>
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>
