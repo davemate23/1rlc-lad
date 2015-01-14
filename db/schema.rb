@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109193327) do
+ActiveRecord::Schema.define(version: 20150114194503) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "type"
@@ -23,7 +23,10 @@ ActiveRecord::Schema.define(version: 20150109193327) do
     t.string   "post_code"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "employee_id"
   end
+
+  add_index "addresses", ["employee_id"], name: "index_addresses_on_employee_id"
 
   create_table "competencies", force: :cascade do |t|
     t.string   "name"
@@ -31,9 +34,12 @@ ActiveRecord::Schema.define(version: 20150109193327) do
     t.string   "grade"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "employee_id"
   end
+
+  add_index "competencies", ["employee_id"], name: "index_competencies_on_employee_id"
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
@@ -45,13 +51,18 @@ ActiveRecord::Schema.define(version: 20150109193327) do
     t.string   "substantive_rank"
     t.date     "promotion_date"
     t.string   "passport_number"
-    t.string   "passport_expiry"
+    t.date     "passport_expiry"
     t.string   "passport_country_of_origin"
     t.string   "nationality"
     t.string   "national_insurance"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "password_digest"
+    t.string   "remember_digest"
+    t.boolean  "admin",                      default: false
   end
+
+  add_index "employees", ["service_no"], name: "index_employees_on_service_no", unique: true
 
   create_table "next_of_kins", force: :cascade do |t|
     t.string   "first_name"
@@ -61,15 +72,21 @@ ActiveRecord::Schema.define(version: 20150109193327) do
     t.string   "relation"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "employee_id"
   end
+
+  add_index "next_of_kins", ["employee_id"], name: "index_next_of_kins_on_employee_id"
 
   create_table "phones", force: :cascade do |t|
     t.string   "type"
     t.string   "name"
     t.string   "number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "employee_id"
   end
+
+  add_index "phones", ["employee_id"], name: "index_phones_on_employee_id"
 
   create_table "qualifications", force: :cascade do |t|
     t.string   "type"
@@ -78,9 +95,12 @@ ActiveRecord::Schema.define(version: 20150109193327) do
     t.date     "end_date"
     t.string   "status"
     t.string   "school"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "employee_id"
   end
+
+  add_index "qualifications", ["employee_id"], name: "index_qualifications_on_employee_id"
 
   create_table "spouses", force: :cascade do |t|
     t.string   "first_name"

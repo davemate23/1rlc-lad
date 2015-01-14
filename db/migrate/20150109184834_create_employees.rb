@@ -10,7 +10,7 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :substantive_rank
       t.date :promotion_date
       t.string :passport_number
-      t.string :passport_expiry
+      t.date :passport_expiry
       t.string :passport_country_of_origin
       t.string :nationality
       t.string :national_insurance

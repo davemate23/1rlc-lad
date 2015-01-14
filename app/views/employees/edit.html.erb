@@ -1,6 +1,58 @@
-<h1>Editing Employee</h1>
+<% provide(:title, "Edit Employee") %>
+<h1>Update your profile</h1>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@uemployee) do |f| %>
+      <%= render 'shared/error_messages' %>
+      
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
 
-<%= link_to 'Show', @employee %> |
-<%= link_to 'Back', employees_path %>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+      
+      <%= f.label :service_no %>
+      <%= f.text_field :service_no %>
+      
+      <%= f.label :date_of_birth %>
+      <%= f.date_select(:date_of_birth, :order => [:day, :month, :year]) %>
+      
+      <%= f.label :gender %>
+      <%= f.text_field :gender %>
+      
+      <%= f.label :service_start_date %>
+      <%= f.date_select(:service_start_date, :order => [:day, :month, :year])  %>
+      
+      <%= f.label :substantive_rank %>
+      <%= f.text_field :substantive_rank %>
+      
+      <%= f.label :promotion_date %>
+      <%= f.date_select(:promotion_date, :order => [:day, :month, :year])  %>
+      
+      <%= f.label :passport_number %>
+      <%= f.text_field :passport_number %>
+      
+      <%= f.label :passport_expiry %>
+      <%= f.date_select(:passport_expiry, :order => [:day, :month, :year])  %>
+      
+      <%= f.label :passport_country_of_origin %>
+      <%= f.text_field :passport_country_of_origin %>
+      
+      <%= f.label :nationality %>
+      <%= f.text_field :nationality %>
+      
+      <%= f.label :national_insurance %>
+      <%= f.text_field :national_insurance%>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+      
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+    
+    </div>
+</div>
