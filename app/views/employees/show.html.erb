@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= render 'form' %>
+
 <p>
   <strong>First name:</strong>
   <%= @employee.first_name %>
@@ -64,6 +66,12 @@
   <strong>National Insurance No:</strong>
   <%= @employee.national_insurance %>
 </p>
+
+<p>
+  <strong>Avatar URL:</strong>
+  <%= @employee.avatar %>
+</p>
+
 
 <%= link_to 'Edit Employee Details', edit_employee_path(@employee) %> | 
 <%= link_to 'Add a Spouse', '#' %> | 

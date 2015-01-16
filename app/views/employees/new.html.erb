@@ -2,7 +2,7 @@
 <h1>Registration</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@employee) do |f| %>
+    <%= form_for(@employee, html: { class: "directUpload" }) do |f| %>
       <%= render 'shared/error_messages' %>
       <%= f.label :first_name %>
       <%= f.text_field :first_name %>
@@ -42,6 +42,9 @@
       
       <%= f.label :national_insurance %>
       <%= f.text_field :national_insurance%>
+
+      <%= f.label :avatar %><br>
+      <%= f.file_field :avatar %>
 
       <%= f.label :password %>
       <%= f.password_field :password %>
