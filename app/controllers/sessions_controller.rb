@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
         message += "Check your email for the activation link."
         flash[:warning] = message
         redirect_to root_url
+      end
       # Log the employee in and redirect to the employee's show page.
     else
       # Create an error message.
