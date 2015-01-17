@@ -1,12 +1,18 @@
 class Employee < ActiveRecord::Base
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
+  before_save   :downcase_email
+  before_create :create_activation_digest
 	validates :last_name, 		presence: true
 	validates :service_no, 		presence: true, 
 								length: { minimum: 5 },
 								length: { maximum: 8 },
 								format: { with: /\A^\d+$\z/ },
 								uniqueness: true
-	validates :date_of_birth, 	presence: true
+	validates :date_of_birth, 	presence: 
+	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
 	validates :gender, 			presence: true
 	validates :service_start_date, presence: true
 	validates :substantive_rank, presence: true
@@ -29,6 +35,13 @@ class Employee < ActiveRecord::Base
 
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  
+   # Returns the hash digest of the given string.
+  def Employee.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                  BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 	
 	  # Returns a random token.
   def Employee.new_token
@@ -41,13 +54,55 @@ class Employee < ActiveRecord::Base
   end
   
     # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-  	return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
   
     # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
   end
+  
+  def activate
+    update_attribute(:activated,    true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+  
+  # Sends activation email.
+  def send_activation_email
+    EmployeeMailer.account_activation(self).deliver_now
+  end
+  
+  # Sends password reset email.
+  def send_password_reset_email
+    EmployeeMailer.password_reset(self).deliver_now
+  end
+  
+   # Sets the password reset attributes.
+  def create_reset_digest
+    self.reset_token = Employee.new_token
+    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+  
+  # Returns true if a password reset has expired.
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+  
+  private
+  
+  
+    # Converts email to all lower-case.
+    def downcase_email
+      self.email = email.downcase
+    end
+    
+    # Creates and assigns the activation token and digest.
+    def create_activation_digest
+      self.activation_token  = Employee.new_token
+      self.activation_digest = Employee.digest(activation_token)
+    end
 end

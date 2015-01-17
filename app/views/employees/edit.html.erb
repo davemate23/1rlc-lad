@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@uemployee) do |f| %>
+    <%= form_for(@employee) do |f| %>
       <%= render 'shared/error_messages' %>
       
       <%= f.label :first_name %>
@@ -20,6 +20,9 @@
       
       <%= f.label :gender %>
       <%= f.text_field :gender %>
+      
+      <%= f.label :email %>
+      <%= f.text_field :email %>
       
       <%= f.label :service_start_date %>
       <%= f.date_select(:service_start_date, :order => [:day, :month, :year])  %>

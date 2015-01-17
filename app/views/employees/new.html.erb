@@ -19,6 +19,9 @@
       <%= f.label :gender %>
       <%= f.text_field :gender %>
       
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+      
       <%= f.label :service_start_date %>
       <%= f.date_select(:service_start_date, :order => [:day, :month, :year])  %>
       

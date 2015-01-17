@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116191701) do
+ActiveRecord::Schema.define(version: 20150116231553) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "type"
@@ -64,6 +64,10 @@ ActiveRecord::Schema.define(version: 20150116191701) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "activation_digest"
+    t.boolean  "activated",                  default: false
+    t.datetime "activated_at"
+    t.string   "email"
   end
 
   add_index "employees", ["service_no"], name: "index_employees_on_service_no", unique: true
