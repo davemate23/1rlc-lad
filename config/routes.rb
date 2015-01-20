@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :roles
+
+  resources :notes
+
   get 'password_resets/new'
 
   get 'password_resets/edit'

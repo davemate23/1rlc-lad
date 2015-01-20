@@ -92,6 +92,15 @@ class Employee < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
   
+  def age
+     x = Date.today.year - date_of_birth.year
+     x -= 1 if Date.today < date_of_birth + x.years #for days before birthday
+  end
+  
+  def years_of_service
+    Date.today.year - service_start_date.year
+  end
+  
   private
   
   

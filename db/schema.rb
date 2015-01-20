@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116231553) do
+ActiveRecord::Schema.define(version: 20150118103307) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "type"
@@ -85,6 +85,16 @@ ActiveRecord::Schema.define(version: 20150116231553) do
 
   add_index "next_of_kins", ["employee_id"], name: "index_next_of_kins_on_employee_id"
 
+  create_table "notes", force: :cascade do |t|
+    t.text     "comment"
+    t.date     "date"
+    t.integer  "employee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "notes", ["employee_id"], name: "index_notes_on_employee_id"
+
   create_table "phones", force: :cascade do |t|
     t.string   "type"
     t.string   "name"
@@ -109,6 +119,19 @@ ActiveRecord::Schema.define(version: 20150116231553) do
   end
 
   add_index "qualifications", ["employee_id"], name: "index_qualifications_on_employee_id"
+
+  create_table "roles", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.string   "PID"
+    t.string   "description"
+    t.string   "ancestry"
+    t.string   "section"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "roles", ["ancestry"], name: "index_roles_on_ancestry"
+  add_index "roles", ["employee_id"], name: "index_roles_on_employee_id"
 
   create_table "spouses", force: :cascade do |t|
     t.string   "first_name"
