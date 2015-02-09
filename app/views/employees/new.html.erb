@@ -2,60 +2,32 @@
 <h1>Registration</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@employee, html: { class: "directUpload" }) do |f| %>
+    <%= semantic_form_for @employee do |f| %>
       <%= render 'shared/error_messages' %>
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name %>
-
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name %>
-      
-      <%= f.label :service_no %>
-      <%= f.text_field :service_no %>
-      
-      <%= f.label :date_of_birth %>
-      <%= f.date_select(:date_of_birth, :order => [:day, :month, :year]) %>
-      
-      <%= f.label :gender %>
-      <%= f.text_field :gender %>
-      
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-      
-      <%= f.label :service_start_date %>
-      <%= f.date_select(:service_start_date, :order => [:day, :month, :year])  %>
-      
-      <%= f.label :substantive_rank %>
-      <%= f.text_field :substantive_rank %>
-      
-      <%= f.label :promotion_date %>
-      <%= f.date_select(:promotion_date, :order => [:day, :month, :year])  %>
-      
-      <%= f.label :passport_number %>
-      <%= f.text_field :passport_number %>
-      
-      <%= f.label :passport_expiry %>
-      <%= f.date_select(:passport_expiry, :order => [:day, :month, :year])  %>
-      
-      <%= f.label :passport_country_of_origin %>
-      <%= f.text_field :passport_country_of_origin %>
-      
-      <%= f.label :nationality %>
-      <%= f.text_field :nationality %>
-      
-      <%= f.label :national_insurance %>
-      <%= f.text_field :national_insurance%>
-
-      <%= f.label :avatar %><br>
-      <%= f.file_field :avatar %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
+      <%= f.inputs do %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :service_no %>
+        <%= f.input :date_of_birth, :as => :date_picker %>
+        <%= f.input :gender, :as => :radio, :collection => [["Male", true], ["Female", false]] %>
+        <%= f.input :email %>
+        <%= f.input :service_start_date, :as => :date_picker %>
+        <%= f.input :substantive_rank, :as => :select, :collection => ["Cfn/Pte", "LCpl", "Cpl", "Sgt", "SSgt", "WO2", "WO1", "2Lt", "Lt", "Capt", "Maj"] %>
+        <%= f.input :promotion_date, :as => :date_picker %>
+        <%= f.input :passport_number %>
+        <%= f.input :passport_expiry, :as => :date_picker %>
+        <%= f.input :passport_country_of_origin, :as => :country, :priority_countries => ["United Kingdom"] %>
+        <%= f.input :nationality, :as => :country, :priority_countries => ["United Kingdom"] %>
+        <%= f.input :national_insurance %>
+        <%= f.input :avatar, :as => :file %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+        <%= f.input :roles, :as => :radio, :collection => Role.pluck(:description, :id) %>
+      <% end %>
+      <%= f.actions do %>
+        <%= f.action :submit, :as => :button %>
+        <%= f.action :cancel, :as => :link %>
+      <% end %>
     <% end %>
   </div>
 </div>

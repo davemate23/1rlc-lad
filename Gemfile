@@ -11,6 +11,10 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'rack-timeout'
 gem 'figaro'
 gem 'ancestry'
+gem 'formtastic', '~> 3.0'
+gem 'formtastic-bootstrap'
+gem 'country_select'
+gem 'cancancan', '~> 1.10'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

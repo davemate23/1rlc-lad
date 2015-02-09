@@ -126,6 +126,10 @@ input, textarea, select, .uneditable-input {
   @include box_sizing;
 }
 
+.date { 
+  display: inline;
+}
+
 input {
   height: auto !important;
 }

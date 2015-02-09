@@ -1,4 +1,5 @@
 class NextOfKinsController < ApplicationController
+  load_and_authorize_resource :next_of_kin
   before_action :set_next_of_kin, only: [:show, :edit, :update, :destroy]
 
   # GET /next_of_kins

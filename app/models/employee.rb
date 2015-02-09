@@ -23,6 +23,8 @@ class Employee < ActiveRecord::Base
 	has_many :phones
 	has_many :qualifications
 	has_many :addresses
+	has_many :assignments
+  has_many :roles, :through => :assignments
 		
 	has_secure_password
 	
@@ -99,6 +101,10 @@ class Employee < ActiveRecord::Base
   
   def years_of_service
     Date.today.year - service_start_date.year
+  end
+  
+  def has_role?(role_sym)
+    roles.any? { |r| r.name.underscore.to_sym == role_sym }
   end
   
   private

@@ -1,4 +1,4 @@
-<%= form_for(@role) do |f| %>
+<%= semantic_form_for(@role) do |f| %>
   <% if @role.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
@@ -10,28 +10,11 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :employee_id %><br>
-    <%= f.number_field :employee_id %>
-  </div>
-  <div class="field">
-    <%= f.label :PID %><br>
-    <%= f.text_field :PID %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :ancestry %><br>
-    <%= f.text_field :ancestry %>
-  </div>
-  <div class="field">
-    <%= f.label :section %><br>
-    <%= f.text_field :section %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.inputs do %>
+    <%= f.inputs :PID %>
+    <%= f.inputs :description %><br>
+    <%= f.collection_select :parent_id, @roles, :id, :name_for_selects, :include_blank => true %>
+    <%= f.inputs :section %>
+  <% end %>
+  <%= f.actions %>
 <% end %>

@@ -1,10 +1,11 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
+
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all
+    @roles = Role.arrange_as_array({:order => 'PID'}, @role.possible_parents)
   end
 
   # GET /roles/1
@@ -14,7 +15,7 @@ class RolesController < ApplicationController
 
   # GET /roles/new
   def new
-    @role = Role.new
+    @roles = Role.arrange_as_array({:order => 'PID'}, @role.possible_parents)
   end
 
   # GET /roles/1/edit
@@ -60,6 +61,18 @@ class RolesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def ancestry_options(items, &block)
+      return ancestry_options(items){ |i| "#{'-' * i.depth} #{i.name}" } unless block_given?
+
+      result = []
+      items.map do |item, sub_items|
+        result << [yield(item), item.id]
+        #this is a recursive call:
+        result += ancestry_options(sub_items, &block)
+      end
+      result
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +82,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:employee_id, :PID, :description, :ancestry, :section)
+      params.require(:role).permit(:employee_id, :PID, :description, :ancestry, :section, :parent_id)
     end
 end

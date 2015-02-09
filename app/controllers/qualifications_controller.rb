@@ -1,4 +1,5 @@
 class QualificationsController < ApplicationController
+  load_and_authorize_resource :qualification
   before_action :set_qualification, only: [:show, :edit, :update, :destroy]
 
   # GET /qualifications

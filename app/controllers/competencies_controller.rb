@@ -1,4 +1,5 @@
 class CompetenciesController < ApplicationController
+  load_and_authorize_resource :competency
   before_action :set_competency, only: [:show, :edit, :update, :destroy]
 
   # GET /competencies

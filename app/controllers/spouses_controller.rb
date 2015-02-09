@@ -1,4 +1,5 @@
 class SpousesController < ApplicationController
+  load_and_authorize_resource :spouse
   before_action :set_spouse, only: [:show, :edit, :update, :destroy]
 
   # GET /spouses
