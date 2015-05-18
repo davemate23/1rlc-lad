@@ -1,217 +1,146 @@
-<p id="notice"><%= notice %></p>
-<div class="container" style="padding-top: 60px;">
-  <h1><%= @employee.substantive_rank + " " + @employee.first_name[0,1] + " " + @employee.last_name %></h1>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<div class="container profile">
   <div class="row">
-    <!-- left column -->
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="text-center">
-        <%= image_tag(@employee.avatar, :alt => "avatar") %>
-        #include if admin for upload image
-        
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block well well-sm">
+    <div class="span12">
+      <div class="well well-small clearfix">
+        <div class="row-fluid">
+          <div class="span2">
+             <img src="http://www.gravatar.com/avatar/f6112e781842d6a2b4636b35451401ff?s=125" class="img-polaroid"/>         
+          </div>
+          <div class="span4">
+             <h2><%= @employee.substantive_rank %> <%= @employee.first_name %> <%= @employee.last_name %></h2> 
+            <ul class="unstyled">
+              <li>Service Number: <%= @employee.service_no %></li>
+              <li><i class="icon-envelope"></i> jonniespratley@me.com</li>
+              <li><i class="icon-globe"></i> http://jonniespratley.me</li>
+            </ul>
+          </div>
+          <div class="span6">
+          <ul class="inline stats">
+               <li>
+                 <span>275</span>
+                 Friends
+              </li>
+              <li>
+                 <span>354</span>
+                 Followers
+              </li>
+               <li>
+                 <span>186</span>
+                 Photos
+              </li>
+          </ul>
+            <div><!--/span6-->
+            </div><!--/row-->
       </div>
-      <div class="text-left">
-        <h3>Personal Info</h3>
-        <div class="col-lg-8">
-          <strong>First Name:</strong>
-          <%= @employee.first_name %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Last Name:</strong>
-          <%= @employee.last_name %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Service Number:</strong>
-          <%= @employee.service_no %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Date of Birth:</strong>
-          <%= @employee.date_of_birth %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Age:</strong>
-          <%= @employee.age %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Substantive Rank:</strong>
-          <%= @employee.substantive_rank %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Promotion Date:</strong>
-          <%= @employee.promotion_date %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Service Start Date:</strong>
-          <%= @employee.service_start_date %>
-        </div>
-        <div class="col-lg-8">
-          <strong>Years of Service:</strong>
-          <%= @employee.years_of_service %>
-        </div>
-        <div class="col-lg-8">
-          <strong>First Name:</strong>
-          <%= @employee.first_name %>
-        </div>
-      </div>
-    </div>
-    <!-- edit form column -->
-    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-      <div class="alert alert-info alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">×</a> 
-        <i class="fa fa-coffee"></i>
-        This is an <strong>.alert</strong>. Use this to show important messages to the user.
-      </div>
-      <h3>Personal info</h3>
-      <form class="form-horizontal" role="form">
-        <div class="form-group">
-          <label class="col-lg-3 control-label">First name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="Jane" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Last name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="Bishop" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Company:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="janesemail@gmail.com" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Time Zone:</label>
-          <div class="col-lg-8">
-            <div class="ui-select">
-              <select id="user_time_zone" class="form-control">
-                <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                <option value="Alaska">(GMT-09:00) Alaska</option>
-                <option value="Pacific Time (US &; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                <option value="Arizona">(GMT-07:00) Arizona</option>
-                <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Username:</label>
-          <div class="col-md-8">
-            <input class="form-control" value="janeuser" type="text">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Password:</label>
-          <div class="col-md-8">
-            <input class="form-control" value="11111122333" type="password">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Confirm password:</label>
-          <div class="col-md-8">
-            <input class="form-control" value="11111122333" type="password">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label"></label>
-          <div class="col-md-8">
-            <input class="btn btn-primary" value="Save Changes" type="button">
-            <span></span>
-            <input class="btn btn-default" value="Cancel" type="reset">
-          </div>
-        </div>
-      </form>
+      <!--Body content-->
     </div>
   </div>
+  <div class="well clearfix">
+            
+            <h3>Contact Numbers</h3> 
+
+            
+
+              <% if @employee.phones.blank? %>
+
+                <p><%= link_to "Add Contact Numbers", new_employee_phone_path(@employee), class: "btn btn-lg btn-primary" %></p>
+
+              <% else  %>
+
+                <p><%= link_to "Edit Contact Numbers", edit_employee_phone_path(@employee, :phones), class: "btn btn-lg btn-primary" %></p>
+
+              <% end %>
+
+            
+  </div>    
+
+   <div class="well clearfix">
+            
+            <h3>Spouse</h3> 
+
+            <% if can? :update, @spouse %>
+
+              <% if @employee.spouses.blank? %>
+
+              <p>This employee has no spouse.</p>
+
+                <p><%= link_to "Add Spouse", new_employee_spouse_path(@employee, :spouses), class: "btn btn-lg btn-primary" %></p>
+
+              <% else %>
+
+                <p><%= link_to "Edit Spouse Details", edit_employee_spouse_path(@employee, :spouses), class: "btn btn-lg btn-primary" %></p>
+                
+              <% end %>
+
+            <% end %>
+  </div>    
+
+   <div class="well clearfix">
+            
+            <h3>Addresses</h3> 
+
+            <% if can? :update, @address %>
+
+              <% if @employee.addresses.blank? %>
+
+                <p><%= link_to "Add Addresses", new_employee_address_path(@employee, :addresses), class: "btn btn-lg btn-primary" %></p>
+
+              <% else %>
+
+                <p><%= link_to "Edit Addresses", edit_employee_address_path(@employee, :addresses), class: "btn btn-lg btn-primary" %></p>
+                
+              <% end %>
+
+            <% end %>
+  </div>    
+
+   <div class="well clearfix">
+            
+            <h3>Next of Kins</h3> 
+
+            <% if can? :update, @next_of_kin %>
+
+              <% if @employee.next_of_kins.blank? %>
+
+                <p><%= link_to "Add Next of Kins", new_employee_next_of_kin_path(@employee, :next_of_kins), class: "btn btn-lg btn-primary" %></p>
+
+              <% else %>
+
+                <p><%= link_to "Edit Next of Kins", edit_employee_next_of_kin_path(@employee, :next_of_kins), class: "btn btn-lg btn-primary" %></p>
+                
+              <% end %>
+
+            <% end %>
+  </div>    
+
+  <div class="well clearfix">
+            
+            <h3>Medical Record</h3> 
+
+            <% if can? :update, @medical_record %>
+
+              <% if @employee.medical_record.blank? %>
+
+                <p><%= link_to "Add Medical Details", new_employee_medical_record_path(@employee, :medical_record), class: "btn btn-lg btn-primary" %></p>
+
+              <% else %>
+
+                <p><%= link_to "Edit Medical Details", edit_employee_medical_record_path(@employee, :medical_record), class: "btn btn-lg btn-primary" %></p>
+                
+              <% end %>
+
+            <% end %>
+  </div>    
+            
+
+
+
+            <div class="well clearfix">
+              
+              
+              
+              <img class="pull-right" src="http://kcdn3.klout.com/static/images/developers/dev-assets/powered-by-klout.png" width="150px"/>
+            </div>
 </div>
-<p>
-  <strong>First name:</strong>
-  <%= @employee.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @employee.last_name %>
-</p>
-
-<p>
-  <strong>Service no:</strong>
-  <%= @employee.service_no %>
-</p>
-
-<p>
-  <strong>Date of birth:</strong>
-  <%= @employee.date_of_birth %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @employee.gender %>
-</p>
-
-<p>
-  <strong>Service Start Date:</strong>
-  <%= @employee.service_start_date %>
-</p>
-
-<p>
-  <strong>Substantive Rank:</strong>
-  <%= @employee.substantive_rank %>
-</p>
-
-<p>
-  <strong>Promotion Date:</strong>
-  <%= @employee.promotion_date %>
-</p>
-
-<p>
-  <strong>Passport Number:</strong>
-  <%= @employee.passport_number %>
-</p>
-
-<p>
-  <strong>Passport Expiry Date:</strong>
-  <%= @employee.passport_expiry %>
-</p>
-
-<p>
-  <strong>Passport Country of Origin:</strong>
-  <%= @employee.passport_country_of_origin %>
-</p>
-
-<p>
-  <strong>Nationality:</strong>
-  <%= @employee.nationality %>
-</p>
-
-<p>
-  <strong>National Insurance No:</strong>
-  <%= @employee.national_insurance %>
-</p>
-
-<p>
-  <strong>Avatar URL:</strong>
-  <%= @employee.avatar %>
-</p>
-
-
-<%= link_to 'Edit Employee Details', edit_employee_path(@employee) %> | 
-<%= link_to 'Add a Spouse', '#' %> | 
-<%= link_to 'Add an Address', '#' %> | 
-<%= link_to 'Add a phone number', '#' %> | 
-<%= link_to 'Add a Competency', '#' %> | 
-<%= link_to 'Add a Qualification', '#' %> |
-<%= link_to 'Add a Next of Kin', '#' %> |
-
-<%= link_to 'Back', employees_path %>

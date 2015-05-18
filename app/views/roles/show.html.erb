@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Pid:</strong>
-  <%= @role.PID %>
+  <strong>PID:</strong>
+  <%= @role.pid %>
 </p>
 
 <p>
@@ -16,8 +16,8 @@
 </p>
 
 <p>
-  <strong>Ancestry:</strong>
-  <%= @role.ancestry %>
+  <strong>Line Manager:</strong>
+  ", "
 </p>
 
 <p>
@@ -26,4 +26,6 @@
 </p>
 
 <%= link_to 'Edit', edit_role_path(@role) %> |
+<%= link_to 'Add Subordinate', new_child_path(:parent_id => @role) %> |
+<%= link_to 'Add Superior', new_parent_path(:child_id => @role) %>
 <%= link_to 'Back', roles_path %>

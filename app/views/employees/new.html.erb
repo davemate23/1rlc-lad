@@ -1,33 +1,7 @@
 <% provide(:title, 'Register') %>
 <h1>Registration</h1>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= semantic_form_for @employee do |f| %>
-      <%= render 'shared/error_messages' %>
-      <%= f.inputs do %>
-        <%= f.input :first_name %>
-        <%= f.input :last_name %>
-        <%= f.input :service_no %>
-        <%= f.input :date_of_birth, :as => :date_picker %>
-        <%= f.input :gender, :as => :radio, :collection => [["Male", true], ["Female", false]] %>
-        <%= f.input :email %>
-        <%= f.input :service_start_date, :as => :date_picker %>
-        <%= f.input :substantive_rank, :as => :select, :collection => ["Cfn/Pte", "LCpl", "Cpl", "Sgt", "SSgt", "WO2", "WO1", "2Lt", "Lt", "Capt", "Maj"] %>
-        <%= f.input :promotion_date, :as => :date_picker %>
-        <%= f.input :passport_number %>
-        <%= f.input :passport_expiry, :as => :date_picker %>
-        <%= f.input :passport_country_of_origin, :as => :country, :priority_countries => ["United Kingdom"] %>
-        <%= f.input :nationality, :as => :country, :priority_countries => ["United Kingdom"] %>
-        <%= f.input :national_insurance %>
-        <%= f.input :avatar, :as => :file %>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
-        <%= f.input :roles, :as => :radio, :collection => Role.pluck(:description, :id) %>
-      <% end %>
-      <%= f.actions do %>
-        <%= f.action :submit, :as => :button %>
-        <%= f.action :cancel, :as => :link %>
-      <% end %>
-    <% end %>
+  <div class="row">
+
+       <%= render 'form' %>
+
   </div>
-</div>

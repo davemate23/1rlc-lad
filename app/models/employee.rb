@@ -18,13 +18,19 @@ class Employee < ActiveRecord::Base
 	validates :substantive_rank, presence: true
 	validates :password, length: { minimum: 6 }, allow_blank: true
 	has_many :competencies
-	has_one :spouse
+	has_many :spouses
 	has_many :next_of_kins
 	has_many :phones
 	has_many :qualifications
 	has_many :addresses
-	has_many :assignments
+  has_one :medical_record
+  has_many :notes
+  has_many :reports
+  has_one :trade_career
+	has_many :assignments, inverse_of: :employee
   has_many :roles, :through => :assignments
+  accepts_nested_attributes_for :assignments
+  accepts_nested_attributes_for :roles
 		
 	has_secure_password
 	

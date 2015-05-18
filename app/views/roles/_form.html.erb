@@ -11,9 +11,8 @@
     </div>
   <% end %>
   <%= f.inputs do %>
-    <%= f.inputs :PID %>
+    <%= f.inputs :pid %>
     <%= f.inputs :description %><br>
-    <%= f.collection_select :parent_id, @roles, :id, :name_for_selects, :include_blank => true %>
     <%= f.inputs :section %>
   <% end %>
   <%= f.actions %>

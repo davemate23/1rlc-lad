@@ -1,9 +1,10 @@
 class Role < ActiveRecord::Base
     has_ancestry
     ROLES = %i[top_corridor line_manager employee]
-    has_many :assignments
+    has_many :assignments, inverse_of: :role
     has_many :employees, :through => :assignments
-    
+    accepts_nested_attributes_for :assignments
+    accepts_nested_attributes_for :employees
     def self.arrange_as_array(options={}, hash=nil)                                                                                                                                                            
         hash ||= arrange(options)
     
@@ -16,7 +17,7 @@ class Role < ActiveRecord::Base
     end
     
     def role_details
-        :description + " " + :PID
+        ([pid, description] - ['']).compact.join(' ')
     end
     
     def name_for_selects

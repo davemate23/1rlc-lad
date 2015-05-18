@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
+  resources :events
+
+  resources :responsibilities
+
+  resources :trade_careers
+
+  resources :reports
+
+  resources :medical_records
+
   resources :roles
+
+  match 'new_parent' => 'roles#new_parent', :via => :get 
+
+  match 'new_child' => 'roles#new_child', :via => :get
 
   resources :notes
 
@@ -33,16 +47,15 @@ Rails.application.routes.draw do
 
   resources :competencies
 
-  resources :next_of_kins
+  resources :employees do
+    resources :phones
+    resources :addresses
+    resources :spouses
+    resources :next_of_kins
+    resources :medical_records
+  end
 
-  resources :phones
-
-  resources :addresses
-
-  resources :spouses
-
-  resources :employees
-
+  resources :assignments
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

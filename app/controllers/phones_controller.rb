@@ -15,11 +15,14 @@ class PhonesController < ApplicationController
 
   # GET /phones/new
   def new
-    @phone = Phone.new
+    @employee = Employee.find(params[:id])
+    @phone = @employee.phones.new(phone_params)
   end
 
   # GET /phones/1/edit
   def edit
+    @employee = Employee.find(params[:id])
+    @phone = Phone.find(phone_params)
   end
 
   # POST /phones
