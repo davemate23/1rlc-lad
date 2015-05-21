@@ -2,31 +2,50 @@ class Ability
   include CanCan::Ability
 
   def initialize(employee)
-    # Define abilities for the passed in user here. For example:
-    #
-employee ||= Employee.new # guest user (not logged in)
+    employee ||= Employee.new
+
     if employee.admin?
-        can :manage, :all
+      can :manage, :all
     else
-        can :read, :all
+      can :manage, Address,   employee: { id: employee.id }
+      can :manage, NextOfKin, employee: { id: employee.id }
+      can :manage, Phone,     employee: { id: employee.id }
+      can :manage, Spouse,    employee: { id: employee.id }
+
+      can :read, Competency,    employee: { id: employee.id }
+      can :read, Qualification, employee: { id: employee.id }
+      can :read, MedicalRecord, employee: { id: employee.id }
+      can :read, TradeCareer,   employee: { id: employee.id }
+      can :read, Event,         employee: { id: employee.id }
+
+      employee.assignments.active.each do |assignment|
+        child_employees_ids = assignment.role.child_employees_ids
+        line_employees_ids =  assignment.role.line_employees_ids
+
+        if child_employees_ids.any? || line_employees_ids.any?
+          can :index, Employee
+
+          child_employees_ids.each do |id|
+            if id != employee.id
+              can :manage, Employee,      id: id
+              can :manage, Address,       employee: { id: id }
+              can :manage, NextOfKin,     employee: { id: id }
+              can :manage, Phone,         employee: { id: id }
+              can :manage, Spouse,        employee: { id: id }
+              can :manage, Competency,    employee: { id: id }
+              can :manage, Qualification, employee: { id: id }
+              can :manage, MedicalRecord, employee: { id: id }
+              can :manage, TradeCareer,   employee: { id: id }
+              can :manage, Event,         employee: { id: id }
+            end
+          end
+
+          line_employees_ids.each do |id|
+            can :read, Employee, id: id
+            can :read, Phone, employee: { id: id }
+          end
+        end
+      end
     end
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 end

@@ -1,0 +1,15 @@
+%h1 Listing Responsibilities
+%table.table
+  %thead
+    %tr
+      %th Employee
+      %th Name
+      %th Description
+      %th
+  %tbody
+    = render @responsibilities
+
+%br
+
+- if can? :create, @parent.responsibilities.build
+  = link_to 'New Responsibility', new_employee_responsibility_path(@parent)

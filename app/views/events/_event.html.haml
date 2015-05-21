@@ -1,0 +1,14 @@
+%tr
+  %td= event.employee.try(:email)
+  %td= event.event_type
+  %td= event.name
+  %td= event.start_date
+  %td= event.end_date
+  %td= event.away
+  %td
+    - if can? :read, event
+      = link_to 'Show', [@parent, event]
+    - if can? :edit, event
+      = link_to 'Edit', edit_employee_event_path(@parent, event)
+    - if can? :destroy, event
+      = link_to 'Destroy', [@parent, event], method: :delete, data: { confirm: 'Are you sure?' }

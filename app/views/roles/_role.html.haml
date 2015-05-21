@@ -1,0 +1,10 @@
+%tr{ id: "role-#{role.id}" }
+  %td= role.pid
+  %td= role.description
+  %td
+    - if can? :read, role
+      = link_to 'Show', role
+    - if can? :edit, role
+      = link_to 'Edit', edit_role_path(role)
+    - if can? :destroy, role
+      = link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,0 +1,11 @@
+%tr
+  %td= responsibility.employee.try(:email)
+  %td= responsibility.name
+  %td= responsibility.description
+  %td
+    - if can? :read, responsibility
+      = link_to 'Show', [@parent, responsibility]
+    - if can? :edit, responsibility
+      = link_to 'Edit', edit_employee_responsibility_path(@parent, responsibility)
+    - if can? :destroy, responsibility
+      = link_to 'Destroy', [@parent, responsibility], method: :delete, data: { confirm: 'Are you sure?' }

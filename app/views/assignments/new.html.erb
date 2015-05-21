@@ -1,4 +1,0 @@
-<%= form_for @employee do |f| %>
-    <%= f.input :role_ids, Role.all.collect {|x| [x.title, x.id]}, {}, :multiple => true %>
-    <%= f.submit %>
-<% end %>

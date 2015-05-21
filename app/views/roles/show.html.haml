@@ -1,0 +1,9 @@
+%p
+  %strong PID: #{@role.pid}
+%p
+  %strong Description: #{@role.description}
+
+- if can? :edit, @role
+  = link_to 'Edit', edit_role_path(@role)
+- if can? :index, Role
+  = link_to 'Back', roles_path

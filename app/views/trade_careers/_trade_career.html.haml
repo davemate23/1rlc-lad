@@ -1,0 +1,16 @@
+%tr
+  %td= trade_career.paab_complete
+  %td= trade_career.paab_result
+  %td= trade_career.next_paab
+  %td= trade_career.tiffy_maths_req
+  %td= trade_career.tiffy_maths_complete
+  %td= trade_career.class_2
+  %td= trade_career.class_1
+  %td= trade_career.artificer
+  %td
+    - if can? :read, trade_career
+      = link_to 'Show', [@parent, trade_career]
+    - if can? :edit, trade_career
+      = link_to 'Edit', edit_employee_trade_career_path(@parent, trade_career)
+    - if can? :destroy, trade_career
+      = link_to 'Destroy', [@parent, trade_career], method: :delete, data: { confirm: 'Are you sure?' }

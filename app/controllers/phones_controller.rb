@@ -1,11 +1,12 @@
 class PhonesController < ApplicationController
-  load_and_authorize_resource :phone
+  include EmployeeAsParent
+
   before_action :set_phone, only: [:show, :edit, :update, :destroy]
 
   # GET /phones
   # GET /phones.json
   def index
-    @phones = Phone.all
+    @phones = @parent.phones
   end
 
   # GET /phones/1
@@ -15,25 +16,22 @@ class PhonesController < ApplicationController
 
   # GET /phones/new
   def new
-    @employee = Employee.find(params[:id])
-    @phone = @employee.phones.new(phone_params)
+    @phone = @parent.phones.build
   end
 
   # GET /phones/1/edit
   def edit
-    @employee = Employee.find(params[:id])
-    @phone = Phone.find(phone_params)
   end
 
   # POST /phones
   # POST /phones.json
   def create
-    @phone = Phone.new(phone_params)
+    @phone = @parent.phones.build(phone_params)
 
     respond_to do |format|
       if @phone.save
-        format.html { redirect_to @phone, notice: 'Phone was successfully created.' }
-        format.json { render :show, status: :created, location: @phone }
+        format.html { redirect_to [@parent, @phone], notice: 'Phone was successfully created.' }
+        format.json { render :show, status: :created, location: [@parent, @phone] }
       else
         format.html { render :new }
         format.json { render json: @phone.errors, status: :unprocessable_entity }
@@ -46,8 +44,8 @@ class PhonesController < ApplicationController
   def update
     respond_to do |format|
       if @phone.update(phone_params)
-        format.html { redirect_to @phone, notice: 'Phone was successfully updated.' }
-        format.json { render :show, status: :ok, location: @phone }
+        format.html { redirect_to [@parent, @phone], notice: 'Phone was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@parent, @phone] }
       else
         format.html { render :edit }
         format.json { render json: @phone.errors, status: :unprocessable_entity }
@@ -60,7 +58,7 @@ class PhonesController < ApplicationController
   def destroy
     @phone.destroy
     respond_to do |format|
-      format.html { redirect_to phones_url, notice: 'Phone was successfully destroyed.' }
+      format.html { redirect_to employee_phones_path(@parent), notice: 'Phone was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -68,11 +66,11 @@ class PhonesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_phone
-      @phone = Phone.find(params[:id])
+      @phone = @parent.phones.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def phone_params
-      params.require(:phone).permit(:type, :name, :number)
+      params.require(:phone).permit(:phone_type, :name, :number)
     end
 end

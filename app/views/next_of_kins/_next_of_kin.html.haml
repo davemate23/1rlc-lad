@@ -1,0 +1,13 @@
+%tr
+  %td= next_of_kin.first_name
+  %td= next_of_kin.last_name
+  %td= next_of_kin.address
+  %td= next_of_kin.contact_number
+  %td= next_of_kin.relation
+  %td
+    - if can? :read, next_of_kin
+      = link_to 'Show', [@parent, next_of_kin]
+    - if can? :edit, next_of_kin
+      = link_to 'Edit', edit_employee_next_of_kin_path(@parent, next_of_kin)
+    - if can? :destroy, next_of_kin
+      = link_to 'Destroy', [@parent, next_of_kin], method: :delete, data: { confirm: 'Are you sure?' }

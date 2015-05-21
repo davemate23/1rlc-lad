@@ -1,0 +1,41 @@
+= semantic_form_for(@employee) do |f|
+  %ul.fields
+    %li.control-group
+      = f.input :first_name
+    %li.control-group
+      = f.input :last_name
+    %li.control-group
+      = f.input :service_no
+    %li.control-group
+      = f.input :date_of_birth, as: :date_picker, input_html: { placeholder: 'DD-MM-YYYY' }
+    %li.control-group
+      = f.input :gender, as: :radio, collection: [['Male', true], ['Female', false]]
+    %li.control-group
+      = f.input :email
+    %li.control-group
+      = f.input :service_start_date, as: :date_picker
+    %li.control-group
+      = f.input :substantive_rank, as: :select, collection: ["Cfn/Pte", "LCpl", "Cpl", "Sgt", "SSgt", "WO2", "WO1", "2Lt", "Lt", "Capt", "Maj"]
+    %li.control-group
+      = f.input :promotion_date, as: :date_picker
+    %li.control-group
+      = f.input :passport_number
+    %li.control-group
+      = f.input :passport_expiry, as: :date_picker
+    %li.control-group
+      = f.input :passport_country_of_origin, as: :country, priority_countries: ["United Kingdom"]
+    %li.control-group
+      = f.input :nationality, as: :country, priority_countries: ["United Kingdom"]
+    %li.control-group
+      = f.input :national_insurance
+    %li.control-group
+      = f.input :avatar, as: :file
+    %li.control-group
+      = f.input :password
+    %li.control-group
+      = f.input :password_confirmation
+
+  .actions
+    = f.submit
+
+

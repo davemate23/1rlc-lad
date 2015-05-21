@@ -1,0 +1,22 @@
+%p
+  %strong Paab complete: #{@trade_career.paab_complete}
+%p
+  %strong Paab result: #{@trade_career.paab_result}
+%p
+  %strong Next paab: #{@trade_career.next_paab}
+%p
+  %strong Tiffy maths req: #{@trade_career.tiffy_maths_req}
+%p
+  %strong Tiffy maths complete: #{@trade_career.tiffy_maths_complete}
+%p
+  %strong Class 2: #{@trade_career.class_2}
+%p
+  %strong Class 1: #{@trade_career.class_1}
+%p
+  %strong Artificer: #{@trade_career.artificer}
+
+- if can? :edit, @trade_career
+  = link_to 'Edit', edit_employee_trade_career_path(@parent, @trade_career)
+- if can? :index, @parent.trade_careers.build
+  |
+  = link_to 'Back', employee_trade_careers_path(@parent)

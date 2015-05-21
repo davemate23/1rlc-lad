@@ -1,0 +1,16 @@
+%p
+  %strong First name: #{@next_of_kin.first_name}
+%p
+  %strong Last name: #{@next_of_kin.last_name}
+%p
+  %strong Address: #{@next_of_kin.address}
+%p
+  %strong Contact number: #{@next_of_kin.contact_number}
+%p
+  %strong Relation: #{@next_of_kin.relation}
+
+- if can :edit, @next_of_kin
+  = link_to 'Edit', edit_employee_next_of_kin_path(@parent, @next_of_kin)
+- if can :index, @parent.next_of_kins.build
+  |
+  = link_to 'Back', employee_next_of_kins_path(@parent)

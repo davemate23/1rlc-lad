@@ -1,0 +1,8 @@
+%h1 Editing Address
+= render 'form'
+
+- if can? :read, @address
+  = link_to 'Show', [@parent, @address]
+- if can? :index, @parent.addresses.build
+  |
+  = link_to 'Back', employee_addresses_path(@parent)

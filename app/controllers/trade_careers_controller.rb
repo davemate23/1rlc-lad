@@ -1,10 +1,12 @@
 class TradeCareersController < ApplicationController
+  include EmployeeAsParent
+
   before_action :set_trade_career, only: [:show, :edit, :update, :destroy]
 
   # GET /trade_careers
   # GET /trade_careers.json
   def index
-    @trade_careers = TradeCareer.all
+    @trade_careers = @parent.trade_careers
   end
 
   # GET /trade_careers/1
@@ -14,7 +16,7 @@ class TradeCareersController < ApplicationController
 
   # GET /trade_careers/new
   def new
-    @trade_career = TradeCareer.new
+    @trade_career = @parent.trade_careers.build
   end
 
   # GET /trade_careers/1/edit
@@ -24,12 +26,12 @@ class TradeCareersController < ApplicationController
   # POST /trade_careers
   # POST /trade_careers.json
   def create
-    @trade_career = TradeCareer.new(trade_career_params)
+    @trade_career = @parent.trade_careers.build(trade_career_params)
 
     respond_to do |format|
       if @trade_career.save
-        format.html { redirect_to @trade_career, notice: 'Trade career was successfully created.' }
-        format.json { render :show, status: :created, location: @trade_career }
+        format.html { redirect_to [@parent, @trade_career], notice: 'Trade career was successfully created.' }
+        format.json { render :show, status: :created, location: [@parent, @trade_career] }
       else
         format.html { render :new }
         format.json { render json: @trade_career.errors, status: :unprocessable_entity }
@@ -42,8 +44,8 @@ class TradeCareersController < ApplicationController
   def update
     respond_to do |format|
       if @trade_career.update(trade_career_params)
-        format.html { redirect_to @trade_career, notice: 'Trade career was successfully updated.' }
-        format.json { render :show, status: :ok, location: @trade_career }
+        format.html { redirect_to [@parent, @trade_career], notice: 'Trade career was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@parent, @trade_career] }
       else
         format.html { render :edit }
         format.json { render json: @trade_career.errors, status: :unprocessable_entity }
@@ -56,7 +58,7 @@ class TradeCareersController < ApplicationController
   def destroy
     @trade_career.destroy
     respond_to do |format|
-      format.html { redirect_to trade_careers_url, notice: 'Trade career was successfully destroyed.' }
+      format.html { redirect_to employee_trade_careers_path(@parent), notice: 'Trade career was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +66,7 @@ class TradeCareersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_trade_career
-      @trade_career = TradeCareer.find(params[:id])
+      @trade_career = @parent.trade_careers.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

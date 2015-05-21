@@ -1,0 +1,16 @@
+%h1 Listing Events
+%table.table
+  %thead
+    %tr
+      %th Employee
+      %th Type
+      %th Name
+      %th Start date
+      %th End date
+      %th Away
+      %th
+  %tbody
+    = render @events
+%br
+- if can? :create, @parent.events.build
+  = link_to 'New Event', new_employee_event_path(@parent)

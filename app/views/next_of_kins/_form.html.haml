@@ -1,0 +1,13 @@
+= semantic_form_for [@parent, @next_of_kin] do |f|
+  .field
+    = f.input :first_name
+  .field
+    = f.input :last_name
+  .field
+    = f.input :address
+  .field
+    = f.input :contact_number
+  .field
+    = f.input :relation
+  .actions
+    = f.submit

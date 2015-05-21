@@ -1,0 +1,16 @@
+%h1 Listing Next Of Kins
+%table.table
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th Address
+      %th Contact number
+      %th Relation
+      %th
+  %tbody
+    = render @next_of_kins
+%br
+
+- if can :create, @parent.next_of_kins.build
+  = link_to 'New Next of kin', new_employee_next_of_kin_path(@parent)

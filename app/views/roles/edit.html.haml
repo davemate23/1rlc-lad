@@ -1,0 +1,8 @@
+%h1 Editing Role
+
+= render 'form'
+
+- if can? :read, @role
+  = link_to 'Show', @role
+- if can? :index, Role
+  = link_to 'Back', roles_path

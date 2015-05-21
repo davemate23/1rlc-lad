@@ -1,0 +1,8 @@
+%h1 Editing Note
+= render 'form'
+
+- if can? :read, @note
+  = link_to 'Show', [@parent, @note]
+- if can? :index, @parent.notes.build
+  |
+  = link_to 'Back', employee_notes_path(@parent)

@@ -1,0 +1,4 @@
+%h1 New Trade Career
+= render 'form'
+- if can? :index, @parent.trade_careers.build
+  = link_to 'Back', employee_trade_careers_path(@parent)

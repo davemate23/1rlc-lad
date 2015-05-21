@@ -1,0 +1,13 @@
+%tr
+  %td= competency.name
+  %td= competency.competency_type
+  %td= competency.grade
+  %td= competency.start_date
+  %td= competency.end_date
+  %td
+    - if can? :read, competency
+      = link_to 'Show', competency
+    - if can? :edit, competency
+      = link_to 'Edit', edit_employee_competency_path(@parent, competency)
+    - if can? :destroy, competency
+      = link_to 'Destroy', [@parent, competency], method: :delete, data: { confirm: 'Are you sure?' }

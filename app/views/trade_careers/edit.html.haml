@@ -1,0 +1,8 @@
+%h1 Editing Trade Career
+= render 'form'
+
+- if can? :read, @trade_career
+  = link_to 'Show', [@parent, @trade_career]
+- if can? :index, @parent.trade_careers.build
+  |
+  = link_to 'Back', employee_trade_careers_path(@parent)

@@ -1,0 +1,4 @@
+%h1 New Report
+= render 'form'
+- if can? :index, @parent.reports.build
+  = link_to 'Back', employee_reports_path(@parent)

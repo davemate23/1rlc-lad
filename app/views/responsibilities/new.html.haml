@@ -1,0 +1,4 @@
+%h1 New Responsibility
+= render 'form'
+- if can? :index, @parent.responsibilities.build
+  = link_to 'Back', employee_responsibilities_path(@parent)

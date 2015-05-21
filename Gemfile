@@ -8,15 +8,16 @@ gem 'paperclip'
 gem 'rails', '4.2.0'
 gem 'bootstrap-sass', '3.2.0.0'
 gem 'will_paginate',  '3.0.7'
+gem 'haml-rails', '~> 0.9'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'rack-timeout'
 gem 'figaro'
-gem 'ancestry'
 gem 'formtastic', '~> 3.0'
 gem 'formtastic-bootstrap'
 gem 'cocoon'
 gem 'country_select'
 gem 'cancancan', '~> 1.10'
+gem 'responders'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -35,19 +36,23 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', :group => :doc
 
-  # Use ActiveModel has_secure_password
-  gem 'bcrypt', '~> 3.1.7'
+gem 'devise', '3.4.1'
+gem 'devise-bootstrap-views'
 
-  # Use Unicorn as the app server
-  gem 'unicorn'
+# Use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Use Unicorn as the app server
+gem 'unicorn'
+
+group :development do
+  gem 'letter_opener'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  
+
   # Use sqlite3 as the database for Active Record
   gem 'pg'
 
@@ -56,12 +61,17 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'factory_girl_rails'
 end
-  
+
 group :test do
-  gem 'minitest-reporters', '1.0.5'
-  gem 'mini_backtrace',     '0.1.3'
-  gem 'guard-minitest',     '2.3.1'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda-matchers'
+  gem 'rspec-mocks', '~> 3.2.1'
+  gem 'capybara'
+  gem 'capybara-screenshot'
+  gem 'database_cleaner'
 end
 
 group :production do

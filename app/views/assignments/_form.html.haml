@@ -1,0 +1,9 @@
+= semantic_form_for [parent, assignment] do |f|
+  = f.input :role_id, as: :select, collection: Role.all.map { |r| [r.pid, r.id] }
+  = f.input :start_date
+  = f.input :end_date
+
+  = f.actions
+
+- if can? :index, Assignment
+  = link_to 'Back', employee_assignments_path(@parent)

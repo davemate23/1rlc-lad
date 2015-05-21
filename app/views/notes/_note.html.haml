@@ -1,0 +1,10 @@
+%tr
+  %td= note.comment
+  %td= note.date
+  %td
+    - if can? :read, note
+      = link_to 'Show', [@parent, note]
+    - if can? :edit, note
+      = link_to 'Edit', edit_employee_note_path(@parent, note)
+    - if can? :destroy, note
+      = link_to 'Destroy', [@parent, note], method: :delete, data: { confirm: 'Are you sure?' }

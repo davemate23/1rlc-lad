@@ -1,0 +1,8 @@
+%h1 Editing Spouse
+= render 'form'
+
+- if can? :read, @spouse
+  = link_to 'Show', [@parent, @spouse]
+- if can? :index, @parent.spouses.build
+  |
+  = link_to 'Back', employee_spouses_path(@parent)

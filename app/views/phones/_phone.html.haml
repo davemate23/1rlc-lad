@@ -1,0 +1,11 @@
+%tr
+  %td= phone.phone_type
+  %td= phone.name
+  %td= phone.number
+  %td
+    - if can? :read, phone
+      = link_to 'Show', [@parent, phone]
+    - if can? :edit, phone
+      = link_to 'Edit', edit_employee_phone_path(@parent, phone)
+    - if can? :destroy, phone
+      = link_to 'Destroy', [@parent, phone], method: :delete, data: { confirm: 'Are you sure?' }

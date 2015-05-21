@@ -1,0 +1,13 @@
+%tr
+  %td= spouse.first_name
+  %td= spouse.last_name
+  %td= spouse.date_of_birth
+  %td= spouse.gender
+  %td= spouse.anniversary
+  %td
+    - if can? :read, spouse
+      = link_to 'Show', [@parent, spouse]
+    - if can? :edit, spouse
+      = link_to 'Edit', edit_employee_spouse_path(@parent, spouse)
+    - if can? :destroy, spouse
+      = link_to 'Destroy', [@parent, spouse], method: :delete, data: { confirm: 'Are you sure?' }

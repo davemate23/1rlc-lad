@@ -1,0 +1,8 @@
+%h1 Editing Qualification
+= render 'form'
+
+- if can? :read, @qualification
+  = link_to 'Show', [@parent, @qualification]
+- if can? :index, @parent.qualifications.build
+  |
+  = link_to 'Back', employee_qualifications_path(@parent)

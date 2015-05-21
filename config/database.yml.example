@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  encoding: utf8
+  pool: 5
+  username: username
+  password: password
+
+development:
+  <<: *default
+  database: 1rlc-lad_development
+
+test:
+  <<: *default
+  database: 1rlc-lad_test
+
+production:
+  <<: *default
+  database: 1rlc-lad_production

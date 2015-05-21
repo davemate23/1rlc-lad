@@ -1,0 +1,16 @@
+%h1 Listing Assignments
+
+%table.table
+  %thead
+    %tr
+      %th Role
+      %th Start date
+      %th End date
+      %th
+  %tbody
+    = render @assignments
+
+- if can? :create, Assignment
+  = link_to 'New assignment', new_polymorphic_path([@parent, Assignment.new])
+
+

@@ -1,0 +1,14 @@
+%h3 Listing Roles
+
+%table.table
+  %thead
+    %tr
+      %th Pid
+      %th Description
+      %th
+
+  %tbody>
+    = render @roles
+%br
+- if can? :create, Role
+  = link_to 'New Role', new_role_path

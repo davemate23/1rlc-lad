@@ -1,0 +1,8 @@
+%h1 Editing Phone
+= render 'form'
+
+- if can? :read, @phone
+  = link_to 'Show', [@parent, @phone]
+- if can? :index, @parent.phones.build
+  |
+  = link_to 'Back', employee_phones_path(@parent)

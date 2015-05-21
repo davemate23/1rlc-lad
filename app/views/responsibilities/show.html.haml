@@ -1,0 +1,12 @@
+%p
+  %strong Employee: #{@responsibility.employee.try(:email)}
+%p
+  %strong Name: #{@responsibility.name}
+%p
+  %strong Description: #{@responsibility.description}
+
+- if can? :edit, @responsibility
+  = link_to 'Edit', edit_employee_responsibility_path(@parent, @responsibility)
+- if can? :index, @parent.responsibilities.build
+  |
+  = link_to 'Back', employee_responsibilities_path(@parent)

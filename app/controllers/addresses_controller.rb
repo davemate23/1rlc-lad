@@ -1,11 +1,12 @@
 class AddressesController < ApplicationController
-  load_and_authorize_resource :address
+  include EmployeeAsParent
+
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = Address.all
+    @addresses = @parent.addresses
   end
 
   # GET /addresses/1
@@ -15,7 +16,7 @@ class AddressesController < ApplicationController
 
   # GET /addresses/new
   def new
-    @address = Address.new
+    @address = @parent.addresses.build
   end
 
   # GET /addresses/1/edit
@@ -25,12 +26,12 @@ class AddressesController < ApplicationController
   # POST /addresses
   # POST /addresses.json
   def create
-    @address = Address.new(address_params)
+    @address = @parent.addresses.create(address_params)
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
-        format.json { render :show, status: :created, location: @address }
+        format.html { redirect_to [@parent, @address], notice: 'Address was successfully created.' }
+        format.json { render :show, status: :created, location: [@parent, @address] }
       else
         format.html { render :new }
         format.json { render json: @address.errors, status: :unprocessable_entity }
@@ -43,8 +44,8 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
-        format.json { render :show, status: :ok, location: @address }
+        format.html { redirect_to [@parent, @address], notice: 'Address was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@aprent, @address] }
       else
         format.html { render :edit }
         format.json { render json: @address.errors, status: :unprocessable_entity }
@@ -57,7 +58,7 @@ class AddressesController < ApplicationController
   def destroy
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
+      format.html { redirect_to [@parent, Address], notice: 'Address was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,11 +66,11 @@ class AddressesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_address
-      @address = Address.find(params[:id])
+      @address = @parent.addresses.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
-      params.require(:address).permit(:type, :street_address, :street_address_2, :town, :county, :country, :post_code)
+      params.require(:address).permit(:address_type, :street_address, :street_address_2, :town, :county, :country, :post_code)
     end
 end
