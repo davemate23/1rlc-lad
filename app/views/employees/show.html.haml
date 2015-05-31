@@ -5,7 +5,7 @@
 
       %ul.list-group
         %li.list-group-item
-          %img.img-polaroid{:src => "http://www.gravatar.com/avatar/f6112e781842d6a2b4636b35451401ff?s=125"}/
+          %img.img-polaroid{:src => @employee.avatar}/
         - if can? :edit, @employee
           %li.list-group-item
             = link_to 'Edit', edit_employee_path(@employee), class: 'btn btn-default'
@@ -20,9 +20,8 @@
         %li.list-group-item Name: #{@employee.first_name} #{@employee.last_name}
         %li.list-group-item Service Number: #{@employee.service_no}
         %li.list-group-item Email: #{@employee.email}
-        %li.list-group-item Friends: 275
-        %li.list-group-item Followers: 354
-        %li.list-group-item Photos: 186
+        %li.list-group-item Age: #{@employee.age}
+
     .col-md-6
       %ul.nav.nav-pills.nav-stacked
         - if can? :index, @employee.addresses.build

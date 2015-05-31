@@ -1,7 +1,17 @@
 = semantic_form_for(@role) do |f|
 
   = f.input :pid
+  = f.input :regt_corps, as: :select,
+  						 label: 'Regt/Corps',
+  						 collection: ["REME", "RLC", "AGC - SPS"]
+  = f.input :rank, as: :check_boxes, 
+  					  collection: ["Pte", "LCpl", "Cpl", "Sgt", "SSgt", "WO2", "WO1", "Lt", "Capt", "Maj"]
+  = f.input :section, as: :select,
+  					  collection: ["HQ", "2 Sqn", "12 Sqn", "23 Sqn", "74 Sqn"]
   = f.input :description
+  = f.input :main_and_alt_trade, 
+  						  label: 'Main and Alternative Trade'
+  = f.input :remarks
   = f.input :role_id, as: :select,
                       label: 'Parent Role',
                       collection: Role.all.map { |r| [r.pid, r.id] }
