@@ -1,0 +1,4 @@
+%h1 New Qualification
+= render 'form'
+- if can? :index, @parent.qualifications.build
+  = link_to 'Back', employee_qualifications_path(@parent)

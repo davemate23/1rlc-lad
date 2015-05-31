@@ -1,0 +1,19 @@
+%h1 Listing Trade Careers
+%table.table
+  %thead
+    %tr
+      %th Paab complete
+      %th Paab result
+      %th Next paab
+      %th Tiffy maths req
+      %th Tiffy maths complete
+      %th Class 2
+      %th Class 1
+      %th Artificer
+      %th
+  %tbody
+    = render @trade_careers
+
+%br
+- if can? :create, @parent.trade_careers.build
+  = link_to 'New Trade career', new_employee_trade_career_path(@parent)

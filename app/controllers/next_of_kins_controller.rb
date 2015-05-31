@@ -1,11 +1,12 @@
 class NextOfKinsController < ApplicationController
-  load_and_authorize_resource :next_of_kin
+  include EmployeeAsParent
+
   before_action :set_next_of_kin, only: [:show, :edit, :update, :destroy]
 
   # GET /next_of_kins
   # GET /next_of_kins.json
   def index
-    @next_of_kins = NextOfKin.all
+    @next_of_kins = @parent.next_of_kins
   end
 
   # GET /next_of_kins/1
@@ -15,7 +16,7 @@ class NextOfKinsController < ApplicationController
 
   # GET /next_of_kins/new
   def new
-    @next_of_kin = NextOfKin.new
+    @next_of_kin = @parent.next_of_kins.build
   end
 
   # GET /next_of_kins/1/edit
@@ -25,12 +26,12 @@ class NextOfKinsController < ApplicationController
   # POST /next_of_kins
   # POST /next_of_kins.json
   def create
-    @next_of_kin = NextOfKin.new(next_of_kin_params)
+    @next_of_kin = @parent.next_of_kins.build(next_of_kin_params)
 
     respond_to do |format|
       if @next_of_kin.save
-        format.html { redirect_to @next_of_kin, notice: 'Next of kin was successfully created.' }
-        format.json { render :show, status: :created, location: @next_of_kin }
+        format.html { redirect_to [@parent, @next_of_kin], notice: 'Next of kin was successfully created.' }
+        format.json { render :show, status: :created, location: [@parent, @next_of_kin] }
       else
         format.html { render :new }
         format.json { render json: @next_of_kin.errors, status: :unprocessable_entity }
@@ -43,8 +44,8 @@ class NextOfKinsController < ApplicationController
   def update
     respond_to do |format|
       if @next_of_kin.update(next_of_kin_params)
-        format.html { redirect_to @next_of_kin, notice: 'Next of kin was successfully updated.' }
-        format.json { render :show, status: :ok, location: @next_of_kin }
+        format.html { redirect_to [@parent, @next_of_kin], notice: 'Next of kin was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@parent, @next_of_kin] }
       else
         format.html { render :edit }
         format.json { render json: @next_of_kin.errors, status: :unprocessable_entity }
@@ -57,7 +58,7 @@ class NextOfKinsController < ApplicationController
   def destroy
     @next_of_kin.destroy
     respond_to do |format|
-      format.html { redirect_to next_of_kins_url, notice: 'Next of kin was successfully destroyed.' }
+      format.html { redirect_to employee_next_of_kins_path(@parent), notice: 'Next of kin was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,7 +66,7 @@ class NextOfKinsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_next_of_kin
-      @next_of_kin = NextOfKin.find(params[:id])
+      @next_of_kin = @parent.next_of_kins.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

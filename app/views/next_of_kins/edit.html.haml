@@ -1,0 +1,8 @@
+%h1 Editing Next Of Kin
+= render 'form'
+
+- if can? :read, @next_of_kin
+  = link_to 'Show', [@parent, @next_of_kin]
+- if can? :index, @parent.next_of_kins.build
+  |
+  = link_to 'Back', employee_next_of_kins_path(@parent)

@@ -1,0 +1,10 @@
+%tr{ id: "assignment-#{assignment.id}" }
+  %td= assignment.role.pid
+  %td= assignment.start_date
+  %td= assignment.end_date
+  %td
+    - if can? :edit, assignment
+      = link_to 'Edit', edit_polymorphic_path([@parent, assignment])
+    - if can? :destroy, assignment
+      = link_to 'Destroy', polymorphic_path([@parent, assignment]), method: :delete, data: { confirm: 'Are you sure?' }
+

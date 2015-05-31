@@ -1,0 +1,13 @@
+%tr
+  %td= qualification.title
+  %td= qualification.grade
+  %td= qualification.end_date
+  %td= qualification.status
+  %td= qualification.school
+  %td
+    - if can? :read, qualification
+      = link_to 'Show', [@parent, qualification]
+    - if can? :edit, qualification
+      = link_to 'Edit', edit_employee_qualification_path(@parent, qualification)
+    - if can? :destroy, qualification
+      = link_to 'Destroy', [@parent, qualification], method: :delete, data: { confirm: 'Are you sure?' }

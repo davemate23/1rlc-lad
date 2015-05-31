@@ -1,0 +1,8 @@
+%h1 Editing Competency
+= render 'form'
+
+- if can? :read, @competency
+  = link_to 'Show', [@parent, @competency]
+- if can? :index, @parent.competencies.build
+  |
+  = link_to 'Back', employee_competencies_path(@parent)

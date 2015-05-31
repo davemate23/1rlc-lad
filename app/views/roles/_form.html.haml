@@ -1,0 +1,9 @@
+= semantic_form_for(@role) do |f|
+
+  = f.input :pid
+  = f.input :description
+  = f.input :role_id, as: :select,
+                      label: 'Parent Role',
+                      collection: Role.all.map { |r| [r.pid, r.id] }
+
+  = f.actions

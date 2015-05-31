@@ -1,11 +1,12 @@
 class QualificationsController < ApplicationController
-  load_and_authorize_resource :qualification
+  include EmployeeAsParent
+
   before_action :set_qualification, only: [:show, :edit, :update, :destroy]
 
   # GET /qualifications
   # GET /qualifications.json
   def index
-    @qualifications = Qualification.all
+    @qualifications = @parent.qualifications
   end
 
   # GET /qualifications/1
@@ -15,7 +16,7 @@ class QualificationsController < ApplicationController
 
   # GET /qualifications/new
   def new
-    @qualification = Qualification.new
+    @qualification = @parent.qualifications.build
   end
 
   # GET /qualifications/1/edit
@@ -25,12 +26,12 @@ class QualificationsController < ApplicationController
   # POST /qualifications
   # POST /qualifications.json
   def create
-    @qualification = Qualification.new(qualification_params)
+    @qualification = @parent.qualifications.build(qualification_params)
 
     respond_to do |format|
       if @qualification.save
-        format.html { redirect_to @qualification, notice: 'Qualification was successfully created.' }
-        format.json { render :show, status: :created, location: @qualification }
+        format.html { redirect_to [@parent, @qualification], notice: 'Qualification was successfully created.' }
+        format.json { render :show, status: :created, location: [@parent, @qualification] }
       else
         format.html { render :new }
         format.json { render json: @qualification.errors, status: :unprocessable_entity }
@@ -43,8 +44,8 @@ class QualificationsController < ApplicationController
   def update
     respond_to do |format|
       if @qualification.update(qualification_params)
-        format.html { redirect_to @qualification, notice: 'Qualification was successfully updated.' }
-        format.json { render :show, status: :ok, location: @qualification }
+        format.html { redirect_to [@parent, @qualification], notice: 'Qualification was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@parent, @qualification] }
       else
         format.html { render :edit }
         format.json { render json: @qualification.errors, status: :unprocessable_entity }
@@ -57,7 +58,7 @@ class QualificationsController < ApplicationController
   def destroy
     @qualification.destroy
     respond_to do |format|
-      format.html { redirect_to qualifications_url, notice: 'Qualification was successfully destroyed.' }
+      format.html { redirect_to employee_qualifications_path(@parent), notice: 'Qualification was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,7 +66,7 @@ class QualificationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_qualification
-      @qualification = Qualification.find(params[:id])
+      @qualification = @parent.qualifications.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

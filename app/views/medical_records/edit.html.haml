@@ -1,0 +1,8 @@
+%h1 Editing Medical Record
+= render 'form'
+
+- if can? :read, @medical_record
+  = link_to 'Show', [@parent, @medical_record]
+- if can? :index, @parent.medical_records.build
+  |
+  = link_to 'Back', employee_medical_records_path(@parent)

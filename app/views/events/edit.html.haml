@@ -1,0 +1,8 @@
+%h1 Editing Event
+= render 'form'
+
+- if can? :read, @event
+  = link_to 'Show', [@parent, @event]
+- if can? :index, @parent.events.build
+  |
+  = link_to 'Back', employee_events_path(@parent)

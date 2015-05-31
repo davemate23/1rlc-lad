@@ -1,0 +1,12 @@
+%tr
+  %td= report.previous_date
+  %td= report.next_date
+  %td= report.mpar
+  %td= report.mpar_date
+  %td
+    - if can? :read, report
+      = link_to 'Show', [@parent, report]
+    - if can? :edit, report
+      = link_to 'Edit', edit_employee_report_path(@parent, report)
+    - if can? :destroy, report
+      = link_to 'Destroy', [@parent, report], method: :delete, data: { confirm: 'Are you sure?' }

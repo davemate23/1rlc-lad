@@ -1,0 +1,17 @@
+%h1 Listing Employees
+
+= will_paginate
+
+%table.table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+  %tbody
+    = render @employees
+
+= will_paginate
+
+- if can? :create, Employee
+  = link_to 'New Employee', new_employee_path

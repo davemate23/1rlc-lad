@@ -1,0 +1,16 @@
+%p
+  %strong Title: #{@qualification.title}
+%p
+  %strong Grade: #{@qualification.grade}
+%p
+  %strong End date: #{@qualification.end_date}
+%p
+  %strong Status: #{@qualification.status}
+%p
+  %strong School: #{@qualification.school}
+
+- if can? :edit, @qualification
+  = link_to 'Edit', edit_employee_qualification_path(@parent, @qualification)
+- if can? :index, @parent.qualifications.build
+  |
+  = link_to 'Back', employee_qualifications_path(@parent)

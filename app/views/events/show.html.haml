@@ -1,0 +1,19 @@
+%p
+  %strong Employee: #{@event.employee.email}
+%p
+  %strong Type: #{@event.event_type}
+%p
+  %strong Name: #{@event.name}
+%p
+  %strong Start date: #{@event.start_date}
+%p
+  %strong End date: #{@event.end_date}
+%p
+  %strong Away: #{@event.away}
+
+
+- if can? :edit, @event
+  = link_to 'Edit', edit_employee_event_path(@parent, @event)
+- if can? :index, @parent.events.build
+  |
+  = link_to 'Back', employee_events_path(@parent)

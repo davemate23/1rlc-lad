@@ -1,6 +1,7 @@
 class RolesController < ApplicationController
-  before_action :set_role, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
+  before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /roles
   # GET /roles.json
@@ -13,7 +14,6 @@ class RolesController < ApplicationController
   # GET /roles/1.json
   def show
     @role = Role.find(params[:id])
-    @employee = @role.employees
   end
 
   # GET /roles/new
@@ -31,8 +31,8 @@ class RolesController < ApplicationController
     @role = Role.new(role_params)
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
-        format.json { render :show, status: :created, location: @role }
+        format.html { redirect_to roles_path, notice: 'Role was successfully created.' }
+        format.json { render :show, status: :created, location: role_assignments_path(@role) }
       else
         format.html { render :new }
         format.json { render json: @role.errors, status: :unprocessable_entity }
@@ -64,26 +64,6 @@ class RolesController < ApplicationController
     end
   end
 
-  def new_parent
-    @role = Role.new(:child_id => params[:child_id])
-  end
-
-  def new_child
-    @role = Role.new(:parent_id => params[:parent_id])
-  end
-  
-  def ancestry_options(items, &block)
-      return ancestry_options(items){ |i| "#{'-' * i.depth} #{i.name}" } unless block_given?
-
-      result = []
-      items.map do |item, sub_items|
-        result << [yield(item), item.id]
-        #this is a recursive call:
-        result += ancestry_options(sub_items, &block)
-      end
-      result
-    end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_role
@@ -92,6 +72,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:employee_id, :pid, :description, :ancestry, :section, :parent_id, :assignments_attributes => [:employee_id, :role_id, :start_date, :employees_attributes => [:id, :role_id, :first_name, :last_name]])
+      params.require(:role).permit(:pid, :description, :role_id)
     end
 end

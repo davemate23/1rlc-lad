@@ -1,0 +1,12 @@
+%p
+  %strong Comment:
+  = @note.comment
+%p
+  %strong Date:
+  = @note.date
+
+- if can? :edit, @note
+  = link_to 'Edit', edit_employee_note_path(@parent, @note)
+- if can? :index, @parent.notes.build
+  |
+  = link_to 'Back', employee_notes_path(@parent)

@@ -1,0 +1,10 @@
+- if can? :read, employee
+  %tr
+    %td= image_tag(employee.avatar(:thumb), alt: "avatar")
+    %td= link_to [employee.substantive_rank, employee.first_name, employee.last_name].join(' '), employee
+    %td
+      - if can? :edit, employee
+        = link_to 'Edit', edit_employee_path(employee)
+      - if can? :destroy, employee
+        = link_to 'Delete', employee, method: :delete, data: { confirm: "You sure?" }
+

@@ -1,0 +1,9 @@
+%tr
+  %td= medical_record.employee.try(:email)
+  %td
+    - if can? :read, medical_record
+      = link_to 'Show', [@parent, medical_record]
+    - if can? :edit, medical_record
+      = link_to 'Edit', edit_employee_medical_record_path(@parent, medical_record)
+    - if can? :destroy, medical_record
+      = link_to 'Destroy', [@parent, medical_record], method: :delete, data: { confirm: 'Are you sure?' }

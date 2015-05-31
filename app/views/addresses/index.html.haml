@@ -1,0 +1,18 @@
+%h1 Listing Addresses
+%table.table
+  %thead
+    %tr
+      %th Type
+      %th Street address
+      %th Street address 2
+      %th Town
+      %th County
+      %th Country
+      %th Post code
+      %th
+  %tbody
+    = render @addresses
+
+%br
+- if can? :create, @parent.addresses.build
+  = link_to 'New Address', new_employee_address_path(@parent)

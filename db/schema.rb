@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518143642) do
+ActiveRecord::Schema.define(version: 20150526185557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "type"
+    t.string   "address_type"
     t.string   "street_address"
     t.string   "street_address_2"
     t.string   "town"
@@ -32,14 +32,12 @@ ActiveRecord::Schema.define(version: 20150518143642) do
   add_index "addresses", ["employee_id"], name: "index_addresses_on_employee_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "employee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "role_id"
+    t.integer  "employee_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "assignment_id"
-    t.integer  "assignment_no"
   end
 
   add_index "assignments", ["employee_id"], name: "index_assignments_on_employee_id", using: :btree
@@ -47,12 +45,12 @@ ActiveRecord::Schema.define(version: 20150518143642) do
 
   create_table "competencies", force: :cascade do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "competency_type"
     t.string   "grade"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "employee_id"
   end
 
@@ -85,13 +83,29 @@ ActiveRecord::Schema.define(version: 20150518143642) do
     t.boolean  "activated",                  default: false
     t.datetime "activated_at"
     t.string   "email"
+    t.string   "encrypted_password",         default: "",    null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",              default: 0,     null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.string   "unconfirmed_email"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "employees", ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
+  add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
+  add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["service_no"], name: "index_employees_on_service_no", unique: true, using: :btree
 
   create_table "events", force: :cascade do |t|
     t.integer  "employee_id"
-    t.string   "type"
+    t.string   "event_type"
     t.string   "name"
     t.datetime "start_date"
     t.datetime "end_date"
@@ -161,7 +175,7 @@ ActiveRecord::Schema.define(version: 20150518143642) do
   end
 
   create_table "phones", force: :cascade do |t|
-    t.string   "type"
+    t.string   "phone_type"
     t.string   "name"
     t.string   "number"
     t.datetime "created_at",  null: false
@@ -208,7 +222,6 @@ ActiveRecord::Schema.define(version: 20150518143642) do
   create_table "roles", force: :cascade do |t|
     t.string   "pid"
     t.string   "description"
-    t.string   "ancestry"
     t.string   "section"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
@@ -216,9 +229,10 @@ ActiveRecord::Schema.define(version: 20150518143642) do
     t.string   "rank"
     t.string   "main_and_alt_trade"
     t.string   "remarks"
+    t.integer  "role_id"
   end
 
-  add_index "roles", ["ancestry"], name: "index_roles_on_ancestry", using: :btree
+  add_index "roles", ["role_id"], name: "index_roles_on_role_id", using: :btree
 
   create_table "spouses", force: :cascade do |t|
     t.string   "first_name"
@@ -247,8 +261,6 @@ ActiveRecord::Schema.define(version: 20150518143642) do
   end
 
   add_foreign_key "addresses", "employees"
-  add_foreign_key "assignments", "employees"
-  add_foreign_key "assignments", "roles"
   add_foreign_key "competencies", "employees"
   add_foreign_key "medical_records", "employees"
   add_foreign_key "next_of_kins", "employees"

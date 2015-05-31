@@ -1,0 +1,52 @@
+
+.well.well-small.clearfix
+  .row
+    .col-md-2
+
+      %ul.list-group
+        %li.list-group-item
+          %img.img-polaroid{:src => "http://www.gravatar.com/avatar/f6112e781842d6a2b4636b35451401ff?s=125"}/
+        - if can? :edit, @employee
+          %li.list-group-item
+            = link_to 'Edit', edit_employee_path(@employee), class: 'btn btn-default'
+        - if can? :index, Assignment
+          %li.list-group-item
+            = link_to 'Assignments', employee_assignments_path(@employee), class: 'btn btn-default'
+
+    .col-md-4
+      %ul.list-group
+        %li.list-group-item Email: #{@employee.email}
+        %li.list-group-item Rank: #{@employee.substantive_rank}
+        %li.list-group-item Name: #{@employee.first_name} #{@employee.last_name}
+        %li.list-group-item Service Number: #{@employee.service_no}
+        %li.list-group-item Email: #{@employee.email}
+        %li.list-group-item Friends: 275
+        %li.list-group-item Followers: 354
+        %li.list-group-item Photos: 186
+    .col-md-6
+      %ul.nav.nav-pills.nav-stacked
+        - if can? :index, @employee.addresses.build
+          %li= link_to 'Addresses', employee_addresses_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.competencies.build
+          %li= link_to 'Competencies', employee_competencies_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.medical_records.build
+          %li= link_to 'Medical Records', employee_medical_records_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.notes.build
+          %li= link_to 'Next Of Kins', employee_next_of_kins_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.notes.build
+          %li= link_to 'Notes', employee_notes_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.phones.build
+          %li= link_to 'Phones', employee_phones_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.qualifications.build
+          %li= link_to 'Qualifications', employee_qualifications_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.reports.build
+          %li= link_to 'Reports', employee_reports_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.spouses.build
+          %li= link_to 'Spouses', employee_spouses_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.trade_careers.build
+          %li= link_to 'Trade Careers', employee_trade_careers_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.events.build
+          %li= link_to 'Events', employee_events_path(@employee), class: 'btn btn-default'
+
+.well.clearfix
+  %img.pull-right{:src => "http://kcdn3.klout.com/static/images/developers/dev-assets/powered-by-klout.png", :width => "150px"}/

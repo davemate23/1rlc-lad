@@ -1,0 +1,16 @@
+%p
+  %strong Name: #{@competency.name}
+%p
+  %strong Type: #{@competency.competency_type}
+%p
+  %strong Grade: #{@competency.grade}
+%p
+  %strong Start date: #{@competency.start_date}
+%p
+  %strong End date: #{@competency.end_date}
+
+- if can? :edit, @competency
+  = link_to 'Edit', edit_employee_competency_path(@parent, @competency)
+- if can? :index, @parent.competencies.build
+  |
+  = link_to 'Back', employee_competencies_path(@parent)

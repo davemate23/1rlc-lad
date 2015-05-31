@@ -1,0 +1,17 @@
+= semantic_form_for [@parent, @address] do |f|
+  .field
+    = f.input :address_type
+  .field
+    = f.input :street_address
+  .field
+    = f.input :street_address_2
+  .field
+    = f.input :town
+  .field
+    = f.input :county
+  .field
+    = f.input :country
+  .field
+    = f.input :post_code
+  .actions
+    = f.submit

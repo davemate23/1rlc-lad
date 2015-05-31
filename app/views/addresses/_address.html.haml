@@ -1,0 +1,15 @@
+%tr
+  %td= address.address_type
+  %td= address.street_address
+  %td= address.street_address_2
+  %td= address.town
+  %td= address.county
+  %td= address.country
+  %td= address.post_code
+  %td
+    - if can? :read, address
+      = link_to 'Show', [@parent, address]
+    - if can? :edit, address
+      = link_to 'Edit', edit_employee_address_path(@parent, address)
+    - if can? :destroy, address
+      = link_to 'Destroy', [@parent, address], method: :delete, data: { confirm: 'Are you sure?' }

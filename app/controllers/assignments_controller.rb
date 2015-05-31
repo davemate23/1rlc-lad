@@ -1,32 +1,53 @@
 class AssignmentsController < ApplicationController
-	
-	def index
-		@assignment = Assignment.all
-		@role = Assignment.roles
+  include EmployeeAsParent
+
+  before_action :set_assignment, only: [:edit, :destroy, :update]
+
+  def index
+    @assignments = @parent.assignments
 	end
 
 	def new
-		@roles = Role.all
-		@employee = Employee.all
+		@assignment = @parent.assignments.build
 	end
 
 	def create
-		@assignment = @employee.assignments.build(:role_id => params[:role_id])
-		if @assignment.save
-	      flash[:info] = "The employee's role has been updated."
-	      redirect_to employees_url
-    	else
-      	  render 'new'
-    	end
+		@assignment = @parent.assignments.build(assignment_params)
+
+    if @assignment.save
+      redirect_to employee_assignments_path(@parent), notice: 'Assignment was successfully created.'
+    else
+      render 'new'
     end
+  end
 
-    def destroy
-    	@assignment = Assignment.find(params[:id]).destroy
-    flash[:success] = "Employee's role was removed"
-	    respond_to do |format|
-	      format.html { redirect_to employees_url, notice: "Employee's role was successfully removed." }
-	      format.json { head :no_content }
-	    end
-  	end
+  def edit
+  end
 
+  def update
+    if @assignment.update(assignment_params)
+      redirect_to employee_assignments_path(@parent), notice: "Assignment was successfully updated."
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+  	@parent.assignments.find(params[:id]).destroy
+
+    respond_to do |format|
+      format.html { redirect_to employee_assignments_path(@parent), notice: "Assignment was successfully removed." }
+      format.json { head :no_content }
+    end
+	end
+
+private
+
+  def assignment_params
+    params.require(:assignment).permit(:role_id, :start_date, :end_date)
+  end
+
+  def set_assignment
+    @assignment = @parent.assignments.find(params[:id])
+  end
 end

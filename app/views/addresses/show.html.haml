@@ -1,0 +1,17 @@
+%p
+  %strong Street address: #{@address.street_address}
+%p
+  %strong Street address 2: #{@address.street_address_2}
+%p
+  %strong Town: #{@address.town}
+%p
+  %strong County: #{@address.county}
+%p
+  %strong Country: #{@address.country}
+%p
+  %strong Post code: #{@address.post_code}
+- if can? :edit, @address
+  = link_to 'Edit', edit_employee_address_path(@parent, @address)
+- if can? :index, @parent.addresses.build
+  |
+  = link_to 'Back', employee_addresses_path(@parent)

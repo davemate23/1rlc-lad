@@ -1,0 +1,14 @@
+%p
+  %strong Previous date: #{@report.previous_date}
+%p
+  %strong Next date: #{@report.next_date}
+%p
+  %strong Mpar: #{@report.mpar}
+%p
+  %strong Mpar date: #{@report.mpar_date}
+
+- if can? :edit, @report
+  = link_to 'Edit', edit_employee_report_path(@parent, @report)
+- if can? :index, @parent.reports.build
+  |
+  = link_to 'Back', employee_reports_path(@parent)

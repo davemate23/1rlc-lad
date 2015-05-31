@@ -1,11 +1,12 @@
 class SpousesController < ApplicationController
-  load_and_authorize_resource :spouse
+  include EmployeeAsParent
+
   before_action :set_spouse, only: [:show, :edit, :update, :destroy]
 
   # GET /spouses
   # GET /spouses.json
   def index
-    @spouses = Spouse.all
+    @spouses = @parent.spouses
   end
 
   # GET /spouses/1
@@ -15,7 +16,7 @@ class SpousesController < ApplicationController
 
   # GET /spouses/new
   def new
-    @spouse = Spouse.new
+    @spouse = @parent.spouses.build
   end
 
   # GET /spouses/1/edit
@@ -25,12 +26,12 @@ class SpousesController < ApplicationController
   # POST /spouses
   # POST /spouses.json
   def create
-    @spouse = Spouse.new(spouse_params)
+    @spouse = @parent.spouses.build(spouse_params)
 
     respond_to do |format|
       if @spouse.save
-        format.html { redirect_to @spouse, notice: 'Spouse was successfully created.' }
-        format.json { render :show, status: :created, location: @spouse }
+        format.html { redirect_to [@parent, @spouse], notice: 'Spouse was successfully created.' }
+        format.json { render :show, status: :created, location: [@parent, @spouse] }
       else
         format.html { render :new }
         format.json { render json: @spouse.errors, status: :unprocessable_entity }
@@ -43,8 +44,8 @@ class SpousesController < ApplicationController
   def update
     respond_to do |format|
       if @spouse.update(spouse_params)
-        format.html { redirect_to @spouse, notice: 'Spouse was successfully updated.' }
-        format.json { render :show, status: :ok, location: @spouse }
+        format.html { redirect_to [@parent, @spouse], notice: 'Spouse was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@parent, @spouse] }
       else
         format.html { render :edit }
         format.json { render json: @spouse.errors, status: :unprocessable_entity }
@@ -57,7 +58,7 @@ class SpousesController < ApplicationController
   def destroy
     @spouse.destroy
     respond_to do |format|
-      format.html { redirect_to spouses_url, notice: 'Spouse was successfully destroyed.' }
+      format.html { redirect_to employee_spouses_path(@parent), notice: 'Spouse was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,11 +66,11 @@ class SpousesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_spouse
-      @spouse = Spouse.find(params[:id])
+      @spouse = @parent.spouses.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spouse_params
-      params.require(:spouse).permit(:first_name, :last_name, :date_of_birth, :gender, :anniversary, :employee_id)
+      params.require(:spouse).permit(:first_name, :last_name, :date_of_birth, :gender, :anniversary)
     end
 end

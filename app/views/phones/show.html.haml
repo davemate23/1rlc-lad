@@ -1,0 +1,12 @@
+%p
+  %strong Type: #{@phone.phone_type}
+%p
+  %strong Name: #{@phone.name}
+%p
+  %strong Number: #{@phone.number}
+
+- if can? :edit, @phone
+  = link_to 'Edit', edit_employee_phone_path(@parent, @phone)
+- if can? :index,  @parent.phones.build
+  |
+  = link_to 'Back', employee_phones_path(@parent)

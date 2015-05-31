@@ -1,0 +1,16 @@
+%h1 Listing Spouses
+%table.table
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th Date of birth
+      %th Gender
+      %th Anniversary
+      %th
+  %tbody
+    = render @spouses
+
+%br
+- if can? :create, @parent.spouses.build
+  = link_to 'New Spouse', new_employee_spouse_path(@parent)
