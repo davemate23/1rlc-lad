@@ -5,7 +5,7 @@
 
       %ul.list-group
         %li.list-group-item
-          %img.img-polaroid{:src => @employee.avatar}/
+          = image_tag @employee.avatar.url(:square)
         - if can? :edit, @employee
           %li.list-group-item
             = link_to 'Edit', edit_employee_path(@employee), class: 'btn btn-default'
