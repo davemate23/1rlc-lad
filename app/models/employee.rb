@@ -33,7 +33,6 @@ class Employee < ActiveRecord::Base
 	has_many :next_of_kins
 	has_many :phones
   has_many :events
-	has_many :qualifications
 	has_many :addresses
   has_many :notes
   has_many :reports
@@ -42,6 +41,7 @@ class Employee < ActiveRecord::Base
   has_many :medical_records
   has_many :responsibilities
   has_and_belongs_to_many :competencies
+  has_and_belongs_to_many :qualifications
 
   has_attached_file :avatar, styles: {
     thumb: '100x100>',
