@@ -10,8 +10,7 @@
   %body
     = render 'header'
     .container
-      .row
-        = bootstrap_flash
-        = yield
-        = render 'footer'
+      = bootstrap_flash
+      = yield
+      = render 'footer'
 
