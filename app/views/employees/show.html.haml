@@ -46,6 +46,8 @@
           %li= link_to 'Trade Careers', employee_trade_careers_path(@employee), class: 'btn btn-default'
         - if can? :index, @employee.events.build
           %li= link_to 'Events', employee_events_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.promotion_dates.build
+          %li= link_to 'Promotion dates', employee_promotion_dates_path(@employee), class: 'btn btn-default'
 
 .well.clearfix
   %img.pull-right{:src => "http://kcdn3.klout.com/static/images/developers/dev-assets/powered-by-klout.png", :width => "150px"}/

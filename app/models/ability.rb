@@ -17,6 +17,7 @@ class Ability
       can :read, MedicalRecord, employee: { id: employee.id }
       can :read, TradeCareer,   employee: { id: employee.id }
       can :read, Event,         employee: { id: employee.id }
+      can :read, PromotionDate, employee: { id: employee.id }
 
       employee.assignments.active.each do |assignment|
         child_employees_ids = assignment.role.child_employees_ids
@@ -37,6 +38,7 @@ class Ability
               can :manage, MedicalRecord, employee: { id: id }
               can :manage, TradeCareer,   employee: { id: id }
               can :manage, Event,         employee: { id: id }
+              can :manage, PromotionDate, employee: { id: id }
             end
           end
 

@@ -1,0 +1,13 @@
+%h1 Listing Promotion Dates
+%table.table
+  %thead
+    %tr
+      %th Substantive rank
+      %th Date
+      %th
+  %tbody
+    = render @promotion_dates
+
+%br
+- if can? :create, @parent.promotion_dates.build
+  = link_to 'New Promotion Date', new_employee_promotion_date_path(@parent)

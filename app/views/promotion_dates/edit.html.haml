@@ -1,0 +1,8 @@
+%h1 Editing Promotion Date
+= render 'form'
+
+- if can? :read, @promotion_date
+  = link_to 'Show', [@parent, @promotion_date]
+- if can? :index, @parent.promotion_dates.build
+  |
+  = link_to 'Back', employee_promotion_dates_path(@parent)
