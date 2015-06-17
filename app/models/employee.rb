@@ -29,7 +29,6 @@ class Employee < ActiveRecord::Base
 	validates :password, length: { minimum: 6 }, allow_blank: true
 
   has_many :assignments
-  has_many :competencies
 	has_many :spouses
 	has_many :next_of_kins
 	has_many :phones
@@ -42,6 +41,7 @@ class Employee < ActiveRecord::Base
   has_many :trade_careers
   has_many :medical_records
   has_many :responsibilities
+  has_and_belongs_to_many :competencies
 
   has_attached_file :avatar, styles: {
     thumb: '100x100>',
