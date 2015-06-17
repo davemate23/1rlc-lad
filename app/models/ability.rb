@@ -10,7 +10,7 @@ class Ability
       can :manage, Address,   employee: { id: employee.id }
       can :manage, NextOfKin, employee: { id: employee.id }
       can :manage, Phone,     employee: { id: employee.id }
-      can :manage, Spouse,    employee: { id: employee.id }
+      can :manage, Dependant, employee: { id: employee.id }
 
       can :read, Competency,    employee: { id: employee.id }
       can :read, Qualification, employee: { id: employee.id }
@@ -31,7 +31,7 @@ class Ability
               can :manage, Address,       employee: { id: id }
               can :manage, NextOfKin,     employee: { id: id }
               can :manage, Phone,         employee: { id: id }
-              can :manage, Spouse,        employee: { id: id }
+              can :manage, Dependant,     employee: { id: id }
               can :manage, Competency,    employee: { id: id }
               can :manage, Qualification, employee: { id: id }
               can :manage, MedicalRecord, employee: { id: id }

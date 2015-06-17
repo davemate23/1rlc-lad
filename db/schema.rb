@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617082459) do
+ActiveRecord::Schema.define(version: 20150617090245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,19 @@ ActiveRecord::Schema.define(version: 20150617082459) do
     t.integer  "grade"
     t.datetime "start_date"
     t.datetime "end_date"
+  end
+
+  create_table "dependants", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.date     "date_of_birth"
+    t.string   "gender"
+    t.date     "anniversary"
+    t.integer  "employee_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "type"
+    t.string   "relation"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -252,18 +265,6 @@ ActiveRecord::Schema.define(version: 20150617082459) do
 
   add_index "roles", ["role_id"], name: "index_roles_on_role_id", using: :btree
 
-  create_table "spouses", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.date     "date_of_birth"
-    t.string   "gender"
-    t.date     "anniversary"
-    t.integer  "employee_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "type"
-  end
-
   create_table "trade_careers", force: :cascade do |t|
     t.date     "paab_complete"
     t.string   "paab_result"
@@ -280,12 +281,12 @@ ActiveRecord::Schema.define(version: 20150617082459) do
 
   add_foreign_key "addresses", "employees"
   add_foreign_key "competencies", "employees"
+  add_foreign_key "dependants", "employees"
   add_foreign_key "medical_records", "employees"
   add_foreign_key "next_of_kins", "employees"
   add_foreign_key "notes", "employees"
   add_foreign_key "phones", "employees"
   add_foreign_key "qualifications", "employees"
   add_foreign_key "reports", "employees"
-  add_foreign_key "spouses", "employees"
   add_foreign_key "trade_careers", "employees"
 end

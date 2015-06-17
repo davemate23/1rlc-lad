@@ -29,7 +29,7 @@ class Employee < ActiveRecord::Base
 	validates :password, length: { minimum: 6 }, allow_blank: true
 
   has_many :assignments
-	has_many :spouses
+	has_many :dependants
 	has_many :next_of_kins
 	has_many :phones
   has_many :events

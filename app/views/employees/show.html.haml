@@ -40,8 +40,8 @@
           %li= link_to 'Qualifications', employee_qualifications_path(@employee), class: 'btn btn-default'
         - if can? :index, @employee.reports.build
           %li= link_to 'Reports', employee_reports_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.spouses.build
-          %li= link_to 'Spouses', employee_spouses_path(@employee), class: 'btn btn-default'
+        - if can? :index, @employee.dependants.build
+          %li= link_to 'Dependants', employee_dependants_path(@employee), class: 'btn btn-default'
         - if can? :index, @employee.trade_careers.build
           %li= link_to 'Trade Careers', employee_trade_careers_path(@employee), class: 'btn btn-default'
         - if can? :index, @employee.events.build

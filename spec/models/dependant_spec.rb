@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Spouse do
-  subject { build(:spouse) }
+describe Dependant do
+  subject { build(:dependant) }
 
   specify 'associations' do
     expect(subject).to belong_to(:employee)
