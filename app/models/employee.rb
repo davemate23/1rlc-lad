@@ -2,8 +2,18 @@ class Employee < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
 
+  attr_accessor :login
+
+  def login=(login)
+    @login = login
+  end
+
+  def login
+    @login || self.service_no || self.email
+  end
+
   devise :database_authenticatable, :recoverable, :rememberable,
-         :trackable, :validatable, :confirmable
+         :trackable, :validatable, :confirmable, authentication_keys: [:login]
 
 	validates :service_no, 		presence: true,
 								length: { minimum: 5 },
@@ -48,5 +58,15 @@ class Employee < ActiveRecord::Base
 
   def years_of_service
     Date.today.year - service_start_date.year
+  end
+
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["lower(service_no) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions.to_h).first
+    end
   end
 end
