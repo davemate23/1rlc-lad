@@ -10,8 +10,24 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require modernizr
 //= require jquery
 //= require jquery_ujs
 //= require cocoon
 //= require bootstrap
+//= require moment
+//= require bootstrap-datetimepicker
 //= require turbolinks
+
+
+$(function(){
+  if (!Modernizr.inputtypes.date) {
+    $('.date_picker input').each(function(){
+      $(this).datetimepicker({ format: 'L'})
+      $(this).datetimepicker('setDate', $(this).val())
+    })
+  }
+})
+
+
+
