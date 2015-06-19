@@ -5,7 +5,7 @@
 
       %ul.list-group
         %li.list-group-item
-          = image_tag @employee.avatar.url(:square)
+          = image_tag @employee.avatar.url(:thumb)
         - if can? :edit, @employee
           %li.list-group-item
             = link_to 'Edit', edit_employee_path(@employee), class: 'btn btn-default'
