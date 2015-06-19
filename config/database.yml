@@ -3,8 +3,8 @@ default: &default
   host: localhost
   encoding: utf8
   pool: 5
-  username: nbsp
-  password:
+  username: dave
+  password: fay586tb
 
 development:
   <<: *default
