@@ -1,15 +1,2 @@
 %h1 Listing Phones
-%table.table
-  %thead
-    %tr
-      %th Type
-      %th Name
-      %th Number
-      %th
-  %tbody
-    = render @phones
-
-%br
-
-- if can? :create, @parent.phones.build
-  = link_to 'New Phone', new_employee_phone_path(@parent)
+= render 'phones', phones: @phones

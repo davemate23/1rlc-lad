@@ -1,0 +1,13 @@
+%table.table
+  %thead
+    %tr
+      %th Employee
+      %th
+  %tbody
+    = render medical_records
+
+%br
+
+- if can? :create, @parent.medical_records.build
+  = link_to 'New Medical record', new_employee_medical_record_path(@parent), class: 'btn btn-default'
+

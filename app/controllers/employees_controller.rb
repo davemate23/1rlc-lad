@@ -14,7 +14,7 @@ class EmployeesController < ApplicationController
   def show
     @employee = Employee.find(params[:id])
     @phones = @employee.phones
-
+    @parent = @employee
   end
 
   # GET /employees/new

@@ -1,16 +1,2 @@
 %h1 Listing Reports
-%table.table
-  %thead
-    %tr
-      %th Previous date
-      %th Next date
-      %th Mpar
-      %th Mpar date
-      %th
-  %tbody
-    = render @reports
-
-%br
-
-- if can? :create, @parent.reports.build
-  = link_to 'New Report', new_employee_report_path(@parent)
+= render 'reports', reports: @reports

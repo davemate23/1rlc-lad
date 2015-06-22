@@ -1,8 +1,8 @@
 %p
   %strong Employee: #{@medical_record.employee.try(:email) }
 
-- if can :edit, @medical_record
+- if can? :edit, @medical_record
   = link_to 'Edit', edit_employee_medical_record_path(@parent, @medical_record)
-- if can :index, @parent.medical_records.build
+- if can? :index, @parent.medical_records.build
   |
   = link_to 'Back', employee_medical_records_path(@parent)
