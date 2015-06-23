@@ -6,7 +6,8 @@ class QualificationsController < ApplicationController
   # GET /qualifications
   # GET /qualifications.json
   def index
-    @qualifications = @parent.qualifications
+    @search = Qualification.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /qualifications/1

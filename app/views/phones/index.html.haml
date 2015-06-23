@@ -1,2 +1,4 @@
 %h1 Listing Phones
-= render 'phones', phones: @phones
+= render 'shared/search/search', resourse_url: employee_phones_path(@parent), filters: [:created_at, :updated_at, :phone_type]
+- if can? :create, @parent.phones.build
+  = link_to 'New Phone', new_employee_phone_path(@parent), class: 'btn btn-default'

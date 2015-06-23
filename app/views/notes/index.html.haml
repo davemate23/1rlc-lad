@@ -1,2 +1,7 @@
 %h1 Listing Notes
-= render 'notes', notes: @notes
+= render 'shared/search/search', resourse_url: employee_notes_path(@parent), filters: [:created_at, :updated_at, :date]
+
+%br
+
+- if can? :create, @parent.notes.build
+  = link_to 'New Note', new_employee_note_path(@parent), class: 'btn btn-default'

@@ -29,15 +29,15 @@ describe Role do
     let!(:assignment4) { create(:assignment, employee: employee4, role: role3) }
 
     specify 'child_employees_ids' do
-      expect(role1.child_employees_ids).to eq [2, 3]
-      expect(role2.child_employees_ids).to eq [3]
-      expect(role3.child_employees_ids).to eq []
+      expect(role1.child_employees_ids).to eq [employee1.id, employee2.id, employee3.id, employee4.id]
+      expect(role2.child_employees_ids).to eq [employee2.id, employee3.id, employee4.id]
+      expect(role3.child_employees_ids).to eq [employee3.id, employee4.id]
     end
 
     specify 'line_employees_ids' do
-      expect(role1.line_employees_ids).to eq [5]
-      expect(role2.line_employees_ids).to eq [6]
-      expect(role3.line_employees_ids).to eq [7, 8]
+      expect(role1.line_employees_ids).to eq [employee1.id]
+      expect(role2.line_employees_ids).to eq [employee2.id]
+      expect(role3.line_employees_ids).to eq [employee3.id, employee4.id]
     end
   end
 end

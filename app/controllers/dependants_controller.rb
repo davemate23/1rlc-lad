@@ -6,7 +6,8 @@ class DependantsController < ApplicationController
   # GET /dependants
   # GET /dependants.json
   def index
-    @dependants = @parent.dependants
+    @search = Dependant.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /dependants/1

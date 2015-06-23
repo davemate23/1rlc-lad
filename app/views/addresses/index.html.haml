@@ -1,2 +1,5 @@
 %h1 Listing Addresses
-= render 'addresses', addresses: @addresses
+= render 'shared/search/search', resourse_url: employee_addresses_path(@parent), filters: [:created_at, :updated_at, :address_type, :country, :town]
+
+- if can? :create, @parent.addresses.build
+  = link_to 'New Address', new_employee_address_path(@parent), class: 'btn btn-default'

@@ -1,0 +1,10 @@
+- if f.object.klass.column_for_attribute(filter).type == :datetime || f.object.klass.column_for_attribute(filter).type == :date
+
+  .form-group
+    = f.label filter
+    = f.date_field filter.to_s + '_gteq', class: 'date_picker form-control'
+    = f.date_field filter.to_s + '_lteq', class: 'date_picker form-control'
+- else
+  .form-group
+    = f.label filter
+    = f.select filter.to_s + '_eq', options_from_collection_for_select(f.object.klass.all, filter, filter), {}, class: 'form-control'

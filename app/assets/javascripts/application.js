@@ -13,11 +13,11 @@
 //= require modernizr
 //= require jquery
 //= require jquery_ujs
-//= require cocoon
 //= require bootstrap
 //= require moment
 //= require bootstrap-datetimepicker
 //= require turbolinks
+//= require_tree .
 
 
 $(function(){

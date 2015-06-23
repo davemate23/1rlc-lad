@@ -14,6 +14,7 @@ gem 'formtastic', '~> 3.0'
 gem 'formtastic-bootstrap'
 gem 'cocoon'
 gem 'country_select'
+gem 'ransack'
 gem 'cancancan', '~> 1.10'
 gem 'responders'
 # Use SCSS for stylesheets

@@ -4,7 +4,8 @@ class PromotionDatesController < ApplicationController
   before_action :set_promotion_date, only: [:show, :edit, :update, :destroy]
 
   def index
-    @promotion_dates = @parent.promotion_dates
+    @search = PromotionDate.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   def show

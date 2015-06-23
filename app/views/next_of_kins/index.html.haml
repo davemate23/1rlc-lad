@@ -1,2 +1,6 @@
 %h1 Listing Next Of Kins
-= render 'next_of_kins', next_of_kins: @next_of_kins
+= render 'shared/search/search', resourse_url: employee_next_of_kins_path(@parent), filters: [:created_at, :updated_at]
+
+%br
+- if can? :create, @parent.next_of_kins.build
+  = link_to 'New Next of kin', new_employee_next_of_kin_path(@parent), class: 'btn btn-default'

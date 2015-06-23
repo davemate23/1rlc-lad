@@ -1,0 +1,4 @@
+.form-group
+  = f.search_field f.object.klass.column_names.join('_or_') + '_or_employee_email_or_employee_first_name_or_employee_last_name_or_employee_service_no_or_employee_substantive_rank'  + '_cont', class: 'form-control'
+
+

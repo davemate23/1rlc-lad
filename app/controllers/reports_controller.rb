@@ -6,7 +6,8 @@ class ReportsController < ApplicationController
   # GET /reports
   # GET /reports.json
   def index
-    @reports = @parent.reports
+    @search = Report.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /reports/1

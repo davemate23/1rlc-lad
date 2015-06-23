@@ -6,7 +6,8 @@ class MedicalRecordsController < ApplicationController
   # GET /medical_records
   # GET /medical_records.json
   def index
-    @medical_records = @parent.medical_records
+    @search = MedicalRecord.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /medical_records/1

@@ -6,7 +6,8 @@ class TradeCareersController < ApplicationController
   # GET /trade_careers
   # GET /trade_careers.json
   def index
-    @trade_careers = @parent.trade_careers
+    @search = TradeCareer.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /trade_careers/1

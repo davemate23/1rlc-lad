@@ -16,6 +16,24 @@
         - if current_employee.present?
           %li.dropdown
             = link_to '#', :class => "dropdown-toggle", :'data-toggle' => "dropdown" do
+              Resources
+              %b.caret
+            %ul.dropdown-menu
+              = header_link 'Phones', employee_phones_path(current_employee) if can? :index, Phone
+              = header_link 'Addresses', employee_addresses_path(current_employee) if can? :index, Address
+              = header_link 'Competencies', employee_competencies_path(current_employee) if can? :index, Competency
+              = header_link 'Dependants', employee_dependants_path(current_employee) if can? :index, Dependant
+              = header_link 'Events', employee_events_path(current_employee) if can? :index, Event
+              = header_link 'Medical Records', employee_medical_records_path(current_employee) if can? :index, MedicalRecord
+              = header_link 'Next Of Kins', employee_next_of_kins_path(current_employee) if can? :index, NextOfKin
+              = header_link 'Notes', employee_notes_path(current_employee) if can? :index, Note
+              = header_link 'Promotion Dates', employee_promotion_dates_path(current_employee) if can? :index, PromotionDate
+              = header_link 'Qualifications', employee_qualifications_path(current_employee) if can? :index, Qualification
+              = header_link 'Reports', employee_reports_path(current_employee) if can? :index, Report
+              = header_link 'Trade Careers', employee_trade_careers_path(current_employee) if can? :index, TradeCareer
+
+          %li.dropdown
+            = link_to '#', :class => "dropdown-toggle", :'data-toggle' => "dropdown" do
               Account
               %b.caret
             %ul.dropdown-menu

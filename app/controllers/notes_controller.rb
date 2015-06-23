@@ -6,7 +6,8 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = @parent.notes
+    @search = Note.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /notes/1

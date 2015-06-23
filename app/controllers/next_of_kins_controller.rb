@@ -6,7 +6,8 @@ class NextOfKinsController < ApplicationController
   # GET /next_of_kins
   # GET /next_of_kins.json
   def index
-    @next_of_kins = @parent.next_of_kins
+    @search = NextOfKin.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /next_of_kins/1
