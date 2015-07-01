@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy, :activate]
 
   # GET /employees
   # GET /employees.json
@@ -39,6 +39,18 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def activate
+    @employee.update(activated: !@employee.activated)
+
+    if @employee.activated
+      flash[:notice] = "Employee was successfully activated."
+    else
+      flash[:notice] = "Employee was successfully deactivated."
+    end
+
+    redirect_to employees_url
+  end
+
   # PATCH/PUT /employees/1
   # PATCH/PUT /employees/1.json
   def update
@@ -68,7 +80,7 @@ class EmployeesController < ApplicationController
 private
 
   def set_employee
-    @employee = Employee.find(params[:id])
+    @employee = Employee.find(params[:id] || params[:employee_id])
   end
 
   def employee_params

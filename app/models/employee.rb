@@ -4,6 +4,8 @@ class Employee < ActiveRecord::Base
 
   attr_accessor :login
 
+  alias_attribute :active_for_authentication?, :activated
+
   def login=(login)
     @login = login
   end

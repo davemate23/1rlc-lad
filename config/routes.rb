@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :roles
 
   resources :employees do
+    post :activate
     resources :medical_records, :events, :phones, :addresses,
               :dependants, :next_of_kins, :medical_records,
               :reports, :notes, :qualifications, :competencies,
