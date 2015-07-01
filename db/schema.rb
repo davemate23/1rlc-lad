@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617090636) do
+ActiveRecord::Schema.define(version: 20150701181624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "employee_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "addresses", ["deleted_at"], name: "index_addresses_on_deleted_at", using: :btree
   add_index "addresses", ["employee_id"], name: "index_addresses_on_employee_id", using: :btree
 
   create_table "assignments", force: :cascade do |t|
@@ -38,8 +40,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.integer  "employee_id"
     t.date     "start_date"
     t.date     "end_date"
+    t.datetime "deleted_at"
   end
 
+  add_index "assignments", ["deleted_at"], name: "index_assignments_on_deleted_at", using: :btree
   add_index "assignments", ["employee_id"], name: "index_assignments_on_employee_id", using: :btree
   add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
 
@@ -52,8 +56,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "employee_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "competencies", ["deleted_at"], name: "index_competencies_on_deleted_at", using: :btree
   add_index "competencies", ["employee_id"], name: "index_competencies_on_employee_id", using: :btree
 
   create_table "competencies_employees", force: :cascade do |t|
@@ -62,7 +68,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.integer  "grade"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "deleted_at"
   end
+
+  add_index "competencies_employees", ["deleted_at"], name: "index_competencies_employees_on_deleted_at", using: :btree
 
   create_table "dependants", force: :cascade do |t|
     t.string   "first_name"
@@ -75,7 +84,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "updated_at",    null: false
     t.string   "type"
     t.string   "relation"
+    t.datetime "deleted_at"
   end
+
+  add_index "dependants", ["deleted_at"], name: "index_dependants_on_deleted_at", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
@@ -117,9 +129,13 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.string   "unconfirmed_email"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "archive_number"
+    t.datetime "archived_at"
+    t.datetime "deleted_at"
   end
 
   add_index "employees", ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
+  add_index "employees", ["deleted_at"], name: "index_employees_on_deleted_at", using: :btree
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["service_no"], name: "index_employees_on_service_no", unique: true, using: :btree
@@ -132,7 +148,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.string   "school"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.datetime "deleted_at"
   end
+
+  add_index "employees_qualifications", ["deleted_at"], name: "index_employees_qualifications_on_deleted_at", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.integer  "employee_id"
@@ -143,7 +162,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.boolean  "away"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "events", ["deleted_at"], name: "index_events_on_deleted_at", using: :btree
 
   create_table "medical_records", force: :cascade do |t|
     t.integer  "employee_id"
@@ -173,8 +195,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.integer  "nato_cat"
     t.date     "dental_next"
     t.text     "notes"
+    t.datetime "deleted_at"
   end
 
+  add_index "medical_records", ["deleted_at"], name: "index_medical_records_on_deleted_at", using: :btree
   add_index "medical_records", ["employee_id"], name: "index_medical_records_on_employee_id", using: :btree
 
   create_table "next_of_kins", force: :cascade do |t|
@@ -186,8 +210,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "employee_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "next_of_kins", ["deleted_at"], name: "index_next_of_kins_on_deleted_at", using: :btree
   add_index "next_of_kins", ["employee_id"], name: "index_next_of_kins_on_employee_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
@@ -196,8 +222,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.integer  "employee_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
   end
 
+  add_index "notes", ["deleted_at"], name: "index_notes_on_deleted_at", using: :btree
   add_index "notes", ["employee_id"], name: "index_notes_on_employee_id", using: :btree
 
   create_table "participants", id: false, force: :cascade do |t|
@@ -212,8 +240,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "employee_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "phones", ["deleted_at"], name: "index_phones_on_deleted_at", using: :btree
   add_index "phones", ["employee_id"], name: "index_phones_on_employee_id", using: :btree
 
   create_table "promotion_dates", force: :cascade do |t|
@@ -222,7 +252,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
+
+  add_index "promotion_dates", ["deleted_at"], name: "index_promotion_dates_on_deleted_at", using: :btree
 
   create_table "qualifications", force: :cascade do |t|
     t.string   "type"
@@ -234,8 +267,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "employee_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "qualifications", ["deleted_at"], name: "index_qualifications_on_deleted_at", using: :btree
   add_index "qualifications", ["employee_id"], name: "index_qualifications_on_employee_id", using: :btree
 
   create_table "reports", force: :cascade do |t|
@@ -246,8 +281,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "employee_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "reports", ["deleted_at"], name: "index_reports_on_deleted_at", using: :btree
   add_index "reports", ["employee_id"], name: "index_reports_on_employee_id", using: :btree
 
   create_table "responsibilities", force: :cascade do |t|
@@ -256,7 +293,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "responsibilities", ["deleted_at"], name: "index_responsibilities_on_deleted_at", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "pid"
@@ -269,8 +309,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.string   "main_and_alt_trade"
     t.string   "remarks"
     t.integer  "role_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "roles", ["deleted_at"], name: "index_roles_on_deleted_at", using: :btree
   add_index "roles", ["role_id"], name: "index_roles_on_role_id", using: :btree
 
   create_table "trade_careers", force: :cascade do |t|
@@ -285,7 +327,10 @@ ActiveRecord::Schema.define(version: 20150617090636) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "employee_id"
+    t.datetime "deleted_at"
   end
+
+  add_index "trade_careers", ["deleted_at"], name: "index_trade_careers_on_deleted_at", using: :btree
 
   add_foreign_key "addresses", "employees"
   add_foreign_key "competencies", "employees"

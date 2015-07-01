@@ -46,6 +46,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 gem 'unicorn'
+gem 'paranoia', '~> 2.0'
 
 group :development do
   gem 'letter_opener'

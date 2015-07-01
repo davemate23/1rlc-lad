@@ -5,6 +5,7 @@ class Employee < ActiveRecord::Base
   attr_accessor :login
 
   alias_attribute :active_for_authentication?, :activated
+  acts_as_paranoid
 
   def login=(login)
     @login = login

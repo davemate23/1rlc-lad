@@ -1,3 +1,4 @@
 class Report < ActiveRecord::Base
-	belongs_to :employee
+	acts_as_paranoid
+  belongs_to :employee
 end
