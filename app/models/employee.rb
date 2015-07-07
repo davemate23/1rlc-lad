@@ -4,8 +4,17 @@ class Employee < ActiveRecord::Base
 
   attr_accessor :login
 
-  alias_attribute :active_for_authentication?, :activated
+  def self.default_scope
+    with_deleted
+  end
+
   acts_as_paranoid
+
+  def active_for_authentication?
+    !deleted?
+  end
+
+  scope :activated, -> { where(activated: true) }
 
   def login=(login)
     @login = login
@@ -39,7 +48,6 @@ class Employee < ActiveRecord::Base
 	has_many :addresses
   has_many :notes
   has_many :reports
-  has_many :events
   has_many :trade_careers
   has_many :medical_records
   has_many :responsibilities

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701181624) do
+ActiveRecord::Schema.define(version: 20150707203828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,6 +253,7 @@ ActiveRecord::Schema.define(version: 20150701181624) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.integer  "rank_point"
   end
 
   add_index "promotion_dates", ["deleted_at"], name: "index_promotion_dates_on_deleted_at", using: :btree

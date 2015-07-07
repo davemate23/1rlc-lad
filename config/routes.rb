@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'help', to: 'static_pages#help'
+  get 'statistics', to: 'static_pages#statistics'
 
   resources :roles
 

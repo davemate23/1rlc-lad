@@ -11,6 +11,7 @@
       %ul.nav.navbar-nav.navbar-right.messages
         = header_link 'Home', root_path
         = header_link 'Help', help_path
+        = header_link 'Statistics', statistics_path
         = header_link 'Employees', employees_path if can?(:index, Employee)
         = header_link 'Roles', roles_path if can?(:index, Role)
         - if current_employee.present?

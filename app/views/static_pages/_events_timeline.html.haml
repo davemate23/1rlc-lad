@@ -1,0 +1,32 @@
+%hr
+
+#events_timeline{ style: 'height: 300px;' }
+
+- data = Event.with_activated_employee.with_start_date.with_end_date.with_event_type.next_two_month.map { |e| ["#{e.employee.first_name} #{e.employee.last_name}", [e.name, e.event_type].join('/ '), [e.start_date.year, e.start_date.month, e.start_date.day], [e.end_date.year, e.end_date.month, e.end_date.day]] }
+
+:javascript
+  $(function(){
+
+    var container = document.getElementById('events_timeline');
+    var chart = new google.visualization.Timeline(container);
+    var data = #{data.to_json}
+
+    $.each(data, function(index, value){
+      data[index][2] = new Date(data[index][2][0], data[index][2][1], data[index][2][2])
+      data[index][3] = new Date(data[index][3][0], data[index][3][1], data[index][3][2])
+    });
+
+
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'string', id: 'Position' });
+    dataTable.addColumn({ type: 'string', id: 'Name' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    dataTable.addRows(data);
+
+    chart.draw(dataTable);
+  });
+
+
+
+

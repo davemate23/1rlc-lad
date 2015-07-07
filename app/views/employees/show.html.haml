@@ -18,6 +18,9 @@
       %li.list-group-item Email: #{@employee.email}
       %li.list-group-item Age: #{@employee.age}
 
+    = line_chart [[@employee.service_start_date, 0]] + @employee.promotion_dates.with_deleted.map { |p| [p.date, p.rank_point] },
+                library: { vAxis: { title: 'Ranks' }, hAxis: { title: 'Date' } }
+
 .row
   = render 'resources', resource_class: Address, title: 'Addresses', partial_name: 'addresses/addresses', partial_params: { addresses: @employee.addresses }
 
