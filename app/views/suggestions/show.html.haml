@@ -1,0 +1,17 @@
+%p
+  %strong Employee: #{@suggestion.employee.email}
+%p
+  %strong Type: #{@suggestion.title}
+%p
+  %strong Name: #{@suggestion.body}
+%p
+  %strong Created at: #{@suggestion.created_at}
+%p
+  %strong Updated at: #{@suggestion.updated_at}
+
+
+- if can? :edit, @suggestion
+  = link_to 'Edit', edit_employee_suggestion_path(@parent, @suggestion)
+- if can? :index, @parent.suggestions.build
+  |
+  = link_to 'Back', employee_suggestions_path(@parent)

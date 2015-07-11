@@ -7,10 +7,10 @@ class Ability
     if employee.admin?
       can :manage, :all
     else
-      can :manage, Address,   employee: { id: employee.id }
-      can :manage, NextOfKin, employee: { id: employee.id }
-      can :manage, Phone,     employee: { id: employee.id }
-      can :manage, Dependant, employee: { id: employee.id }
+      can :manage, Address,    employee: { id: employee.id }
+      can :manage, NextOfKin,  employee: { id: employee.id }
+      can :manage, Phone,      employee: { id: employee.id }
+      can :manage, Dependant,  employee: { id: employee.id }
 
       can :read, Competency,    employee: { id: employee.id }
       can :read, Qualification, employee: { id: employee.id }
@@ -18,6 +18,9 @@ class Ability
       can :read, TradeCareer,   employee: { id: employee.id }
       can :read, Event,         employee: { id: employee.id }
       can :read, PromotionDate, employee: { id: employee.id }
+
+
+      can :create, Suggestion, employee: { id: employee.id }
 
       employee.assignments.active.each do |assignment|
         child_employees_ids = assignment.role.child_employees_ids

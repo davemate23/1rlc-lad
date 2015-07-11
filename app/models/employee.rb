@@ -52,6 +52,7 @@ class Employee < ActiveRecord::Base
   has_many :medical_records
   has_many :responsibilities
   has_many :promotion_dates
+  has_many :suggestions
   has_and_belongs_to_many :competencies
   has_and_belongs_to_many :qualifications
 

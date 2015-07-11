@@ -1,0 +1,12 @@
+%tr
+  %td= suggestion.employee.try(:email)
+  %td= suggestion.title
+  %td= suggestion.created_at
+  %td= suggestion.updated_at
+  %td
+    - if can? :read, suggestion
+      = link_to 'Show', [@parent, suggestion]
+    - if can? :edit, suggestion
+      = link_to 'Edit', edit_employee_suggestion_path(@parent, suggestion)
+    - if can? :destroy, suggestion
+      = link_to 'Destroy', [@parent, suggestion], method: :delete, data: { confirm: 'Are you sure?' }

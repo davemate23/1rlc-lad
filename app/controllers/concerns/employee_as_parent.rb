@@ -2,8 +2,7 @@ module EmployeeAsParent
   extend ActiveSupport::Concern
 
   included do
-    load_and_authorize_resource :employee
-    load_and_authorize_resource through: :employee
+    load_and_authorize_resource through: :current_employee#, shallow: true
 
     before_action :set_parent
   end
