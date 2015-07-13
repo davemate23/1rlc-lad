@@ -13,4 +13,5 @@
              library: { vAxis: { title: 'Age' }, hAxis: { title: 'Frequency' } }
 %legend Competencies
 = bar_chart Competency.group(:competency_type).count
-
+%legend Substantive ranks
+= bar_chart Employee.activated.group(:substantive_rank).count
