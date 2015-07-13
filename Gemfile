@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', :group => :doc
 
+gem 'birthday'
 gem 'devise', '3.4.1'
 gem 'devise-bootstrap-views'
 gem 'momentjs-rails', '>= 2.9.0'

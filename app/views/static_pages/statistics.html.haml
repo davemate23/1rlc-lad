@@ -8,5 +8,7 @@
 = geo_chart Address.includes(:employee).where({ employees: { activated: true } }).map { |a| [a.country, a.town, a.street_address].join(' ') }.count
 %legend Gender
 = pie_chart Employee.activated.group(:gender).count
-
+%legend Age
+= bar_chart Employee.with_age.group(:age).count.map { |key, value| [key, value] },
+             library: { vAxis: { title: 'Age' }, hAxis: { title: 'Frequency' } }
 

@@ -1,6 +1,7 @@
 class Employee < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
+  acts_as_birthday :date_of_birth
 
   attr_accessor :login
 
@@ -15,6 +16,7 @@ class Employee < ActiveRecord::Base
   end
 
   scope :activated, -> { where(activated: true) }
+  scope :with_age, -> { where.not(age: nil) }
 
   def login=(login)
     @login = login
@@ -65,10 +67,7 @@ class Employee < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  def age
-     x = Date.today.year - date_of_birth.year
-     x -= 1 if Date.today < date_of_birth + x.years #for days before birthday
-  end
+  before_validation :set_age
 
   def years_of_service
     Date.today.year - service_start_date.year
@@ -82,5 +81,11 @@ class Employee < ActiveRecord::Base
     else
       where(conditions.to_h).first
     end
+  end
+
+  private
+
+  def set_age
+    self.age = date_of_birth_age
   end
 end
