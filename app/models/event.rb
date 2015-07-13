@@ -7,4 +7,6 @@ class Event < ActiveRecord::Base
   scope :with_end_date, -> { where.not(end_date: nil) }
   scope :with_event_type, -> { where.not(event_type: nil) }
   scope :with_activated_employee, -> { includes(:employee).where({employees: { activated: true }}) }
+
+  scope :away, -> { where(away: true) }
 end

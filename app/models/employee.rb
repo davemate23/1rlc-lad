@@ -26,6 +26,11 @@ class Employee < ActiveRecord::Base
     @login || self.service_no || self.email
   end
 
+  def next_away_event
+    Event.first
+    #events.away.where('start_date >= ?', Date.today).order('start_date').first
+  end
+
   devise :database_authenticatable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable, authentication_keys: [:login]
 
