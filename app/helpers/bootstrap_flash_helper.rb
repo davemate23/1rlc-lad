@@ -13,4 +13,8 @@ module BootstrapFlashHelper
 
     flash_messages.join(' ').html_safe
   end
+
+  def alert_danger(&block)
+    content_tag(:div, capture(&block), class: 'alert alert-danger')
+  end
 end

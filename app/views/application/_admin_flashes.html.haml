@@ -1,0 +1,20 @@
+- CompetenciesEmployee.employees_with_expiry_competency.each do |employee|
+  = alert_danger do
+    Employee has expired competency,
+    = link_to 'please check ', employee_competencies_path(employee)
+
+- Employee.with_expired_passport.each do |employee|
+  = alert_danger do
+    Employee has expired passport,
+    = link_to 'please check ', edit_employee_path(employee)
+
+- MedicalRecord.employees_with_expiry_medical_record.each do |employee|
+  = alert_danger do
+    Employee has expired medical record,
+    = link_to 'please check ', edit_employee_path(employee)
+
+- Report.employees_with_expiry_report.each do |employee|
+  = alert_danger do
+    Employee has expired report,
+    = link_to 'please check ', edit_employee_path(employee)
+

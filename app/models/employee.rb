@@ -17,6 +17,7 @@ class Employee < ActiveRecord::Base
 
   scope :activated, -> { where(activated: true) }
   scope :with_age, -> { where.not(age: nil) }
+  scope :with_expired_passport, -> { where('passport_expiry <= ?', Date.today - 6.month) }
 
   def login=(login)
     @login = login

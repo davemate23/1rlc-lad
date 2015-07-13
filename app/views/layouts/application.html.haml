@@ -20,6 +20,7 @@
     = render 'header'
     .container
       = bootstrap_flash
+      = render 'admin_flashes' if current_employee.admin?
       = yield
       = render 'footer'
 
