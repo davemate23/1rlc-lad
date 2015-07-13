@@ -1,4 +1,4 @@
-%legend Statistics
+%legend Employees
 = line_chart Employee.group_by_week(:confirmed_at).count
 %legend Geo by Country
 = geo_chart Address.includes(:employee).where({ employees: { activated: true } }).group(:country).count
@@ -6,6 +6,7 @@
 = geo_chart Address.includes(:employee).where({ employees: { activated: true } }).group(:town).count
 %legend Geo by Address
 = geo_chart Address.includes(:employee).where({ employees: { activated: true } }).map { |a| [a.country, a.town, a.street_address].join(' ') }.count
-
+%legend Gender
+= pie_chart Employee.activated.group(:gender).count
 
 
