@@ -31,6 +31,10 @@ user.promotion_dates.create(substantive_rank: 'rank4', date: Time.now + 2.weeks,
 end
 
 
+user.announcements.create(title: 'Title 1', body: 'Some body 1')
+user.announcements.create(title: 'Title 1', body: 'Some body 2')
+user.announcements.create(title: 'Title 3', body: 'Some body 3')
+
 
 # - each Parent can manage their descendents (through Ancestry Gem).
 # - Employees can see their own profile details except for their Notes which only their managers can see.

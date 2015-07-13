@@ -1,0 +1,17 @@
+%p
+  %strong Employee: #{@announcement.employee.email}
+%p
+  %strong Type: #{@announcement.title}
+%p
+  %strong Name: #{@announcement.body}
+%p
+  %strong Created at: #{@announcement.created_at}
+%p
+  %strong Updated at: #{@announcement.updated_at}
+
+
+- if can? :edit, @announcement
+  = link_to 'Edit', edit_employee_announcement_path(@parent, @announcement)
+- if can? :index, @parent.announcements.build
+  |
+  = link_to 'Back', employee_announcements_path(@parent)

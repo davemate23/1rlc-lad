@@ -1,0 +1,8 @@
+%h1 Editing Announcement
+= render 'form'
+
+- if can? :read, @announcement
+  = link_to 'Show', [@parent, @announcement]
+- if can? :index, @parent.announcement.build
+  |
+  = link_to 'Back', employee_announcements_path(@parent)

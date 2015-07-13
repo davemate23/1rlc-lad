@@ -53,6 +53,7 @@ class Employee < ActiveRecord::Base
   has_many :responsibilities
   has_many :promotion_dates
   has_many :suggestions
+  has_many :announcements
   has_and_belongs_to_many :competencies
   has_and_belongs_to_many :qualifications
 

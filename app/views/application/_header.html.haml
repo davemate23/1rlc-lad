@@ -21,6 +21,7 @@
               Resources
               %b.caret
             %ul.dropdown-menu
+              = header_link 'Announcements', employee_announcements_path(current_employee) if can? :index, Announcement
               = header_link 'Phones', employee_phones_path(current_employee) if can? :index, Phone
               = header_link 'Addresses', employee_addresses_path(current_employee) if can? :index, Address
               = header_link 'Competencies', employee_competencies_path(current_employee) if can? :index, Competency

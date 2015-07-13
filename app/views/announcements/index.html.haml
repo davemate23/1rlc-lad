@@ -1,0 +1,5 @@
+%h1 Listing Announcements
+= render 'shared/search/search', resourse_url: employee_announcements_path(@parent), filters: [:created_at, :updated_at]
+%br
+- if can? :create, @parent.announcements.build
+  = link_to 'New Announcement', new_employee_announcement_path(@parent), class: 'btn btn-default'

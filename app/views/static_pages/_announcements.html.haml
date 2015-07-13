@@ -1,0 +1,10 @@
+- if @announcements.any?
+  %h4 Announcements
+  %table.table.table-striped
+    - @announcements.each do |announcement|
+      %tr
+        %td= announcement.title
+        %td= announcement.body
+        %td= announcement.created_at
+
+

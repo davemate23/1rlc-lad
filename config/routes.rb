@@ -13,6 +13,6 @@ Rails.application.routes.draw do
               :dependants, :next_of_kins, :medical_records,
               :reports, :notes, :qualifications, :competencies,
               :responsibilities, :trade_careers, :assignments,
-              :promotion_dates, :suggestions
+              :promotion_dates, :suggestions, :announcements
   end
 end
