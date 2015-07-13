@@ -11,4 +11,6 @@
 %legend Age
 = bar_chart Employee.with_age.group(:age).count.map { |key, value| [key, value] },
              library: { vAxis: { title: 'Age' }, hAxis: { title: 'Frequency' } }
+%legend Competencies
+= bar_chart Competency.group(:competency_type).count
 
