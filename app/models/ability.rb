@@ -23,31 +23,33 @@ class Ability
       can :create, Suggestion, employee: { id: employee.id }
 
       employee.assignments.active.each do |assignment|
-        child_employees_ids = assignment.role.child_employees_ids
-        line_employees_ids =  assignment.role.line_employees_ids
+        if assignment.role.present?
+          child_employees_ids = assignment.role.child_employees_ids
+          line_employees_ids =  assignment.role.line_employees_ids
 
-        if child_employees_ids.any? || line_employees_ids.any?
-          can :index, Employee
+          if child_employees_ids.any? || line_employees_ids.any?
+            can :index, Employee
 
-          child_employees_ids.each do |id|
-            if id != employee.id
-              can :manage, Employee,      id: id
-              can :manage, Address,       employee: { id: id }
-              can :manage, NextOfKin,     employee: { id: id }
-              can :manage, Phone,         employee: { id: id }
-              can :manage, Dependant,     employee: { id: id }
-              can :manage, Competency,    employee: { id: id }
-              can :manage, Qualification, employee: { id: id }
-              can :manage, MedicalRecord, employee: { id: id }
-              can :manage, TradeCareer,   employee: { id: id }
-              can :manage, Event,         employee: { id: id }
-              can :manage, PromotionDate, employee: { id: id }
+            child_employees_ids.each do |id|
+              if id != employee.id
+                can :manage, Employee,      id: id
+                can :manage, Address,       employee: { id: id }
+                can :manage, NextOfKin,     employee: { id: id }
+                can :manage, Phone,         employee: { id: id }
+                can :manage, Dependant,     employee: { id: id }
+                can :manage, Competency,    employee: { id: id }
+                can :manage, Qualification, employee: { id: id }
+                can :manage, MedicalRecord, employee: { id: id }
+                can :manage, TradeCareer,   employee: { id: id }
+                can :manage, Event,         employee: { id: id }
+                can :manage, PromotionDate, employee: { id: id }
+              end
             end
-          end
 
-          line_employees_ids.each do |id|
-            can :read, Employee, id: id
-            can :read, Phone, employee: { id: id }
+            line_employees_ids.each do |id|
+              can :read, Employee, id: id
+              can :read, Phone, employee: { id: id }
+            end
           end
         end
       end
