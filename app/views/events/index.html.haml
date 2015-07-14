@@ -1,5 +1,6 @@
 %h1 Listing Events
-= render 'shared/search/search', resourse_url: employee_events_path(@parent), filters: [:created_at, :updated_at, :event_type]
+= render 'shared/search/search', resourse_url: employee_events_path(@parent), filters: [:created_at, :updated_at, :event_type], columns: ['employee', 'event_type', 'name', 'start_date', 'end_date', 'away']
 %br
 - if can? :create, @parent.events.build
   = link_to 'New Event', new_employee_event_path(@parent), class: 'btn btn-default'
+

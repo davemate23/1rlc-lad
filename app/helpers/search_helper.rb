@@ -1,8 +1,4 @@
 module SearchHelper
-  def model_fields(object)
-    object.column_names
-  end
-
   def results_limit
     # max number of search results to display
     10
@@ -20,32 +16,36 @@ module SearchHelper
     action_name == 'advanced_search' ? :post : :get
   end
 
-  def display_sort_column_headers(search)
-    model_fields(search.klass).each_with_object('') do |field, string|
-      if field == 'employee_id'
-        string << content_tag(:th, sort_link(search, 'Employee: Service No/Rank/Name', {}, method: action))
+  def display_sort_column_headers(search, columns)
+    columns.each_with_object('') do |field, string|
+      if field == 'employee'
+        string << content_tag(:th, sort_link(search, 'Employee', {}, method: action))
       else
         string << content_tag(:th, sort_link(search, field, {}, method: action))
       end
     end
   end
 
-  def display_search_results(objects)
+  def display_search_results(objects, columns)
     objects.limit(results_limit).each_with_object('') do |object, string|
-      string << content_tag(:tr, display_search_results_row(object))
+      string << content_tag(:tr, display_search_results_row(object, columns))
     end
   end
 
-  def display_search_results_row(object)
-    model_fields(object.class).each_with_object('') do |field, string|
-      if field == 'employee_id'
+  def display_search_results_row(object, columns)
+    columns.each_with_object('') do |field, string|
+      if field == 'employee'
         if object.employee.present?
           string << content_tag(:td, "#{object.employee.service_no}/#{object.employee.substantive_rank}/#{object.employee.last_name}")
         else
           content_tag(:td)
         end
       else
-        string << content_tag(:td, object.send(field))
+        if object.send(field).methods.include? :strftime
+          string << content_tag(:td, object.send(field).strftime('%e %b %Y'))
+        else
+          string << content_tag(:td, object.send(field))
+        end
       end
     end
     .html_safe

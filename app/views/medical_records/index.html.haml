@@ -1,7 +1,6 @@
 %h1 Listing Medical Records
-= render 'shared/search/search', resourse_url: employee_medical_records_path(@parent), filters: [:created_at, :updated_at, :blood_group]
+= render 'shared/search/search', resourse_url: employee_medical_records_path(@parent), filters: [:created_at, :updated_at, :blood_group], columns: ['employee', 'created_at', 'updated_at', 'pstat', 'deployability', 'hep_a', 'hep_a_next', 'hep_b', 'hep_b_next', 'diptheria', 'diptheria_next', 'polio', 'polio_next', 'tetanus', 'tetanus_next', 'typhoid', 'typhoid_next', 'yellow_fever', 'yellow_fever_next', 'mmr', 'mmr_next', 'audio', 'audio_next', 'blood_group', 'nato_cat', 'dental_next', 'notes', 'deleted_at', 'expiry_date']
 
 %br
 - if can? :create, @parent.medical_records.build
   = link_to 'New Medical record', new_employee_medical_record_path(@parent), class: 'btn btn-default'
-

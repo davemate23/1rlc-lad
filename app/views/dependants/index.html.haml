@@ -1,5 +1,5 @@
 %h1 Listing Dependants
-= render 'shared/search/search', resourse_url: employee_dependants_path(@parent), filters: [:created_at, :updated_at, :date_of_birth, :gender, :type, :relation]
+= render 'shared/search/search', resourse_url: employee_dependants_path(@parent), filters: [:created_at, :updated_at, :date_of_birth, :gender, :type, :relation], columns: ['employee', 'relation', 'first_name', 'last_name', 'gender', 'date_of_birth', 'anniversary']
 %br
 - if can? :create, @parent.dependants.build
   = link_to 'New Dependant', new_employee_dependant_path(@parent), class: 'btn btn-default'

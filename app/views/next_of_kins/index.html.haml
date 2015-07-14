@@ -1,5 +1,5 @@
 %h1 Listing Next Of Kins
-= render 'shared/search/search', resourse_url: employee_next_of_kins_path(@parent), filters: [:created_at, :updated_at]
+= render 'shared/search/search', resourse_url: employee_next_of_kins_path(@parent), filters: [:created_at, :updated_at], columns: ['employee', 'relation', 'full_name', 'contact_number', 'updated_at']
 
 %br
 - if can? :create, @parent.next_of_kins.build
