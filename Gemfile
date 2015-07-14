@@ -50,6 +50,8 @@ gem 'unicorn'
 gem 'paranoia', '~> 2.0'
 gem 'chartkick'
 gem 'groupdate'
+gem 'airbrake'
+
 
 group :development do
   gem 'letter_opener'
