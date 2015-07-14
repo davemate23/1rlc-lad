@@ -6,7 +6,7 @@
   %td= competency.end_date
   %td
     - if can? :read, competency
-      = link_to 'Show', competency
+      = link_to 'Show', [@parent, competency]
     - if can? :edit, competency
       = link_to 'Edit', edit_employee_competency_path(@parent, competency)
     - if can? :destroy, competency
