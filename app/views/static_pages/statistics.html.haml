@@ -3,7 +3,7 @@
 %legend Geo by Country
 = geo_chart Address.includes(:employee).where({ employees: { activated: true, admin: false } }).group(:country).count
 %legend Geo by City
-= geo_chart Address.includes(:employee).where({ employees: { activated: true, admin: false } }).group(:town).count, library: { region: 'GB' }
+= geo_chart Address.includes(:employee).where({ employees: { activated: true, admin: false } }).group(:town).count, library: { region: 'GB', displayMode: 'markers' }
 %legend Gender
 = pie_chart Employee.not_admin.activated.group(:gender).count
 %legend Age
