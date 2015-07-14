@@ -1,7 +1,6 @@
 %h1 Listing Trade Careers
 = render 'shared/search/search', resourse_url: employee_trade_careers_path(@parent), filters: [:created_at, :updated_at, :next_paab, :paab_complete, :class_2, :class_1, :artificer], columns: ['employee', 'paab_complete', 'paab_result', 'next_paab', 'tiffy_maths_complete', 'class_2', 'class_1', 'artificer']
 
-
 %br
 - if can? :create, @parent.trade_careers.build
   = link_to 'New Trade career', new_employee_trade_career_path(@parent), class: 'btn btn-default'

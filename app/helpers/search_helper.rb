@@ -17,13 +17,17 @@ module SearchHelper
   end
 
   def display_sort_column_headers(search, columns)
-    columns.each_with_object('') do |field, string|
+    result = columns.each_with_object('') do |field, string|
       if field == 'employee'
         string << content_tag(:th, sort_link(search, 'Employee', {}, method: action))
       else
         string << content_tag(:th, sort_link(search, field, {}, method: action))
       end
     end
+
+    result += content_tag(:th)
+
+    result
   end
 
   def display_search_results(objects, columns)
@@ -33,7 +37,7 @@ module SearchHelper
   end
 
   def display_search_results_row(object, columns)
-    columns.each_with_object('') do |field, string|
+    result = columns.each_with_object('') do |field, string|
       if field == 'employee'
         if object.employee.present?
           string << content_tag(:td, "#{object.employee.service_no}/#{object.employee.substantive_rank}/#{object.employee.last_name}")
@@ -48,6 +52,12 @@ module SearchHelper
         end
       end
     end
-    .html_safe
+
+    result += content_tag :th do
+      link_to('Edit', polymorphic_path([:edit, object.employee, object])) + ' | ' +
+      link_to('Delete', polymorphic_path([object.employee, object]), method: :delete)
+    end
+
+    result.html_safe
   end
 end

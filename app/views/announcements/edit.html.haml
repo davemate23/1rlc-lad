@@ -3,6 +3,6 @@
 
 - if can? :read, @announcement
   = link_to 'Show', [@parent, @announcement]
-- if can? :index, @parent.announcement.build
+- if can? :index, @parent.announcements.build
   |
   = link_to 'Back', employee_announcements_path(@parent)
