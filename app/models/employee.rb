@@ -33,7 +33,7 @@ class Employee < ActiveRecord::Base
   end
 
   devise :invitable, :database_authenticatable, :recoverable, :rememberable,
-         :trackable, :validatable, :confirmable, authentication_keys: [:login]
+         :trackable, :validatable, authentication_keys: [:login]
 
 	validates :service_no, 		presence: true,
 								length: { minimum: 5 },
