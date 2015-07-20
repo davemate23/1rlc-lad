@@ -33,6 +33,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     if @employee.save
+      @employee.invite!
       redirect_to employee_assignments_path(@employee), notice: "Employee was successfully created."
     else
       render 'new'

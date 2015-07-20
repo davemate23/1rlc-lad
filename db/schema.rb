@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713214621) do
+ActiveRecord::Schema.define(version: 20150720185459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,14 @@ ActiveRecord::Schema.define(version: 20150713214621) do
 
   add_index "dependants", ["deleted_at"], name: "index_dependants_on_deleted_at", using: :btree
 
+  create_table "employee_notices", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "notice_id"
+    t.boolean  "hidden"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -124,7 +132,7 @@ ActiveRecord::Schema.define(version: 20150713214621) do
     t.boolean  "activated",                  default: false
     t.datetime "activated_at"
     t.string   "email"
-    t.string   "encrypted_password",         default: "",    null: false
+    t.string   "encrypted_password",         default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -141,11 +149,22 @@ ActiveRecord::Schema.define(version: 20150713214621) do
     t.datetime "archived_at"
     t.datetime "deleted_at"
     t.integer  "age"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",          default: 0
   end
 
   add_index "employees", ["confirmation_token"], name: "index_employees_on_confirmation_token", unique: true, using: :btree
   add_index "employees", ["deleted_at"], name: "index_employees_on_deleted_at", using: :btree
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
+  add_index "employees", ["invitation_token"], name: "index_employees_on_invitation_token", unique: true, using: :btree
+  add_index "employees", ["invitations_count"], name: "index_employees_on_invitations_count", using: :btree
+  add_index "employees", ["invited_by_id"], name: "index_employees_on_invited_by_id", using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   add_index "employees", ["service_no"], name: "index_employees_on_service_no", unique: true, using: :btree
 
@@ -237,6 +256,12 @@ ActiveRecord::Schema.define(version: 20150713214621) do
 
   add_index "notes", ["deleted_at"], name: "index_notes_on_deleted_at", using: :btree
   add_index "notes", ["employee_id"], name: "index_notes_on_employee_id", using: :btree
+
+  create_table "notices", force: :cascade do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "participants", id: false, force: :cascade do |t|
     t.integer "employee_id", null: false

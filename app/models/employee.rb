@@ -32,7 +32,7 @@ class Employee < ActiveRecord::Base
     events.away.where('start_date >= ?', Date.today).order('start_date').first
   end
 
-  devise :database_authenticatable, :recoverable, :rememberable,
+  devise :invitable, :database_authenticatable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable, authentication_keys: [:login]
 
 	validates :service_no, 		presence: true,
@@ -74,6 +74,7 @@ class Employee < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   before_validation :set_age
+  before_validation :set_password
 
   def years_of_service
     Date.today.year - service_start_date.year
@@ -93,5 +94,13 @@ class Employee < ActiveRecord::Base
 
   def set_age
     self.age = date_of_birth_age
+  end
+
+  def set_password
+    if self.new_record?
+      password = Devise.friendly_token.first(8)
+      self.password = password
+      self.password_confirmation = password
+    end
   end
 end
