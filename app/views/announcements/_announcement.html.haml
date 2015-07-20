@@ -1,8 +1,8 @@
 %tr
   %td= announcement.employee.try(:email)
   %td= announcement.title
-  %td= announcement.created_at
-  %td= announcement.updated_at
+  %td= announcement.created_at.strftime('%e %b %Y')
+  %td= announcement.updated_at.strftime('%e %b %Y')
   %td
     - if can? :read, announcement
       = link_to 'Show', [@parent, announcement]

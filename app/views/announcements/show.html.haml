@@ -5,9 +5,9 @@
 %p
   %strong Name: #{@announcement.body}
 %p
-  %strong Created at: #{@announcement.created_at}
+  %strong Created at: #{@announcement.created_at.strftime('%e %b %Y')}
 %p
-  %strong Updated at: #{@announcement.updated_at}
+  %strong Updated at: #{@announcement.updated_at.strftime('%e %b %Y')}
 
 
 - if can? :edit, @announcement

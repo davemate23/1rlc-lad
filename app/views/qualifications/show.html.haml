@@ -3,7 +3,7 @@
 %p
   %strong Grade: #{@qualification.grade}
 %p
-  %strong End date: #{@qualification.end_date}
+  %strong End date: #{@qualification.end_date.strftime('%e %b %Y')}
 %p
   %strong Status: #{@qualification.status}
 %p

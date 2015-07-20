@@ -30,10 +30,11 @@
       = f.input :national_insurance
     %li.control-group
       = f.input :avatar, as: :file
-    %li.control-group
-      = f.input :password
-    %li.control-group
-      = f.input :password_confirmation
+    - if @employee.new_record?
+      %li.control-group
+        = f.input :password
+      %li.control-group
+        = f.input :password_confirmation
 
   .actions
     = f.submit

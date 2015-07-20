@@ -1,11 +1,11 @@
 %p
-  %strong Previous date: #{@report.previous_date}
+  %strong Previous date: #{@report.previous_date.strftime('%e %b %Y')}
 %p
-  %strong Next date: #{@report.next_date}
+  %strong Next date: #{@report.next_date.strftime('%e %b %Y')}
 %p
   %strong Mpar: #{@report.mpar}
 %p
-  %strong Mpar date: #{@report.mpar_date}
+  %strong Mpar date: #{@report.mpar_date.strftime('%e %b %Y')}
 
 - if can? :edit, @report
   = link_to 'Edit', edit_employee_report_path(@parent, @report)

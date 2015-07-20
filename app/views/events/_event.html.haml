@@ -2,8 +2,8 @@
   %td= event.employee.try(:email)
   %td= event.event_type
   %td= event.name
-  %td= event.start_date
-  %td= event.end_date
+  %td= event.start_date.strftime('%e %b %Y')
+  %td= event.end_date.strftime('%e %b %Y')
   %td= event.away
   %td
     - if can? :read, event

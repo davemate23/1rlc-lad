@@ -5,9 +5,9 @@
 %p
   %strong Name: #{@suggestion.body}
 %p
-  %strong Created at: #{@suggestion.created_at}
+  %strong Created at: #{@suggestion.created_at.strftime('%e %b %Y')}
 %p
-  %strong Updated at: #{@suggestion.updated_at}
+  %strong Updated at: #{@suggestion.updated_at.strftime('%e %b %Y')}
 
 
 - if can? :edit, @suggestion

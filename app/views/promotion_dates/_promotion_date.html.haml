@@ -1,6 +1,6 @@
 %tr
   %td= promotion_date.substantive_rank
-  %td= promotion_date.date
+  %td= promotion_date.date.strftime('%e %b %Y')
   %td
     - if can? :read, promotion_date
       = link_to 'Show', [@parent, promotion_date]

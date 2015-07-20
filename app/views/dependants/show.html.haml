@@ -3,7 +3,7 @@
 %p
   %strong Last name: #{@dependant.last_name}
 %p
-  %strong Date of birth: #{@dependant.date_of_birth}
+  %strong Date of birth: #{@dependant.date_of_birth.strftime('%e %b %Y')}
 %p
   %strong Gender: #{@dependant.gender}
 %p
