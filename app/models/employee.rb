@@ -65,11 +65,15 @@ class Employee < ActiveRecord::Base
   has_and_belongs_to_many :competencies
   has_and_belongs_to_many :qualifications
 
-  has_attached_file :avatar, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
-  }
+  has_attached_file :avatar,
+                    styles: {
+                      thumb: '100x100>',
+                      square: '200x200#',
+                      medium: '300x300>'
+                    },
+                    storage: :s3,
+                    s3_credentials: Proc.new{|a| a.instance.s3_credentials }
+
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
@@ -88,6 +92,10 @@ class Employee < ActiveRecord::Base
     else
       where(conditions.to_h).first
     end
+  end
+
+  def s3_credentials
+    { bucket: '1rlc-lad', access_key_id: 'AKIAJQWRPNG3BF7RWHNQ', secret_access_key: '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' }
   end
 
   private

@@ -52,6 +52,7 @@ gem 'paranoia', '~> 2.0'
 gem 'chartkick'
 gem 'groupdate'
 gem 'airbrake'
+gem 'aws-sdk'
 
 
 group :development do
