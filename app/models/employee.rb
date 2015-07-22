@@ -71,7 +71,7 @@ class Employee < ActiveRecord::Base
                       square: '200x200#',
                       medium: '300x300>'
                     },
-                    storage: :s3,
+                    storage: (Rails.env.production? ? :s3 : :filesystem),
                     s3_credentials: Proc.new{|a| a.instance.s3_credentials }
 
 
@@ -95,7 +95,7 @@ class Employee < ActiveRecord::Base
   end
 
   def s3_credentials
-    { bucket: '1rlc-lad', access_key_id: 'AKIAJQWRPNG3BF7RWHNQ', secret_access_key: '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' }
+    { bucket: ENV['AWS_BUCKET'], access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] }
   end
 
   private
