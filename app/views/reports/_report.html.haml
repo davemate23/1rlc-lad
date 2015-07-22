@@ -1,8 +1,8 @@
 %tr
-  %td= report.previous_date.strftime('%e %b %Y')
-  %td= report.next_date.strftime('%e %b %Y')
+  %td= report.previous_date.strftime('%e %b %Y') if report.previous_date.present?
+  %td= report.next_date.strftime('%e %b %Y') if report.next_date.present?
   %td= report.mpar
-  %td= report.mpar_date.strftime('%e %b %Y')
+  %td= report.mpar_date.strftime('%e %b %Y') if report.mpar_date.present?
   %td
     - if can? :read, report
       = link_to 'Show', [@parent, report]

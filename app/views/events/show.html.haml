@@ -5,9 +5,9 @@
 %p
   %strong Name: #{@event.name}
 %p
-  %strong Start date: #{@event.start_date.strftime('%e %b %Y')}
+  %strong Start date: #{@event.start_date.strftime('%e %b %Y') if @event.start_date.present?}
 %p
-  %strong End date: #{@event.end_date.strftime('%e %b %Y')}
+  %strong End date: #{@event.end_date.strftime('%e %b %Y') if @event.end_date.present?}
 %p
   %strong Away: #{@event.away}
 

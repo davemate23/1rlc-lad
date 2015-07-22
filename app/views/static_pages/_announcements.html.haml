@@ -5,6 +5,6 @@
       %tr
         %td= announcement.title
         %td= announcement.body
-        %td= announcement.created_at.strftime('%e %b %Y')
+        %td= announcement.created_at.strftime('%e %b %Y') if announcement.created_at.present?
 
 

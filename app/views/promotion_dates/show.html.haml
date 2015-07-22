@@ -1,5 +1,5 @@
 %p
-  %strong Date: #{@promotion_date.date.strftime('%e %b %Y')}
+  %strong Date: #{@promotion_date.date.strftime('%e %b %Y') if @promotion_date.date.present?}
 %p
   %strong Substantive rank: #{@promotion_date.substantive_rank}
 

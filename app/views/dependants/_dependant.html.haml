@@ -1,7 +1,7 @@
 %tr
   %td= dependant.first_name
   %td= dependant.last_name
-  %td= dependant.date_of_birth.strftime('%e %b %Y')
+  %td= dependant.date_of_birth.strftime('%e %b %Y') if dependant.date_of_birth.present?
   %td= dependant.gender
   %td= dependant.relation
   %td= dependant.anniversary

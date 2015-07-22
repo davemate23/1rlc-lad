@@ -1,8 +1,8 @@
 %tr
   %td= suggestion.employee.try(:email)
   %td= suggestion.title
-  %td= suggestion.created_at.strftime('%e %b %Y')
-  %td= suggestion.updated_at.strftime('%e %b %Y')
+  %td= suggestion.created_at.strftime('%e %b %Y') if suggestion.created_at.present?
+  %td= suggestion.updated_at.strftime('%e %b %Y') if suggestion.updated_at.present?
   %td
     - if can? :read, suggestion
       = link_to 'Show', [@parent, suggestion]
