@@ -39,8 +39,8 @@ gem 'birthday'
 gem 'devise', '3.4.1'
 gem 'devise-bootstrap-views'
 gem 'devise_invitable'
-gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                                  :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'modernizr-rails'
 
 # Use ActiveModel has_secure_password

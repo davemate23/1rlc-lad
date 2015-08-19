@@ -14,19 +14,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require moment
-//= require bootstrap-datetimepicker
 //= require turbolinks
+//= require bootstrap-datepicker
 //= require_tree .
 
 
 $(function(){
-  if (!Modernizr.inputtypes.date) {
-    $('.date_picker input').each(function(){
-      $(this).datetimepicker({ format: 'L'})
-      $(this).datetimepicker('setDate', $(this).val())
-    })
-  }
+  $('.date_picker input').datepicker({format: "dd/mm/yyyy"});
 })
 
 
