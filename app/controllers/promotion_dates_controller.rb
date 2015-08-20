@@ -23,7 +23,7 @@ class PromotionDatesController < ApplicationController
 
     respond_to do |format|
       if @promotion_date.save
-        format.html { redirect_to [@parent, @promotion_date], notice: 'Promotion date was successfully created.' }
+        format.html { redirect_to @parent, notice: 'Promotion date was successfully created.' }
         format.json { render :show, status: :created, location: [@parent, @promotion_date] }
       else
         format.html { render :new }
