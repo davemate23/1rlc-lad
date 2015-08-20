@@ -1,18 +1,6 @@
 %h1 Listing Addresses
-%table.table
-  %thead
-    %tr
-      %th Type
-      %th Street address
-      %th Street address 2
-      %th Town
-      %th County
-      %th Country
-      %th Post code
-      %th
-  %tbody
-    = render @addresses
+= render 'shared/search/search', resourse_url: employee_addresses_path(@parent), filters: [:created_at, :updated_at, :address_type, :country, :town], columns: ['employee', 'address_type', 'full_name', 'updated_at']
 
-%br
 - if can? :create, @parent.addresses.build
-  = link_to 'New Address', new_employee_address_path(@parent)
+  = link_to 'New Address', new_employee_address_path(@parent), class: 'btn btn-default'
+

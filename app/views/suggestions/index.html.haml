@@ -1,0 +1,2 @@
+%h1 Listing Suggestions
+= render 'shared/search/search', resourse_url: employee_suggestions_path(@parent), filters: [:created_at, :updated_at], columns: ['title', 'body', 'updated_at']

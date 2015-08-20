@@ -1,4 +1,6 @@
 class Assignment < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :employee
   belongs_to :role
 

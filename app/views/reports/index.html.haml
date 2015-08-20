@@ -1,16 +1,8 @@
 %h1 Listing Reports
-%table.table
-  %thead
-    %tr
-      %th Previous date
-      %th Next date
-      %th Mpar
-      %th Mpar date
-      %th
-  %tbody
-    = render @reports
+= render 'shared/search/search', resourse_url: employee_reports_path(@parent), filters: [:created_at, :updated_at, :previous_date, :next_date, :mpar_date], columns: ['employee', 'previous_date', 'next_date', 'mpar', 'mpar_date', 'updated_at']
 
 %br
 
 - if can? :create, @parent.reports.build
-  = link_to 'New Report', new_employee_report_path(@parent)
+  = link_to 'New Report', new_employee_report_path(@parent), class: 'btn btn-default'
+

@@ -1,0 +1,14 @@
+%table.table
+  %thead
+    %tr
+      %th Title
+      %th Grade
+      %th End date
+      %th Status
+      %th School
+      %th
+  %tbody
+    = render qualifications
+%br
+- if can? :create, @parent.qualifications.build
+  = link_to 'New Qualification', new_employee_qualification_path(@parent), class: 'btn btn-default'

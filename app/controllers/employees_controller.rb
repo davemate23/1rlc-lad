@@ -1,12 +1,12 @@
 class EmployeesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy, :activate]
 
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.where.not(id: current_employee.id).paginate(page: params[:page])
+    @employees = Employee.with_deleted.where.not(id: current_employee.id).paginate(page: params[:page])
   end
 
   # GET /employees/1
@@ -14,7 +14,7 @@ class EmployeesController < ApplicationController
   def show
     @employee = Employee.find(params[:id])
     @phones = @employee.phones
-
+    @parent = @employee
   end
 
   # GET /employees/new
@@ -33,10 +33,23 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
 
     if @employee.save
+      @employee.invite!
       redirect_to employee_assignments_path(@employee), notice: "Employee was successfully created."
     else
       render 'new'
     end
+  end
+
+  def activate
+    @employee.update(activated: !@employee.activated)
+
+    if @employee.activated
+      flash[:notice] = "Employee was successfully activated."
+    else
+      flash[:notice] = "Employee was successfully deactivated."
+    end
+
+    redirect_to employees_url
   end
 
   # PATCH/PUT /employees/1
@@ -57,10 +70,16 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1
   # DELETE /employees/1.json
   def destroy
-    @employee.destroy
+    if @employee.deleted?
+      @employee.restore
+      flash[:notice] = "Employee was successfully activated."
+    else
+      @employee.destroy
+      flash[:notice] = "Employee was successfully deactivated."
+    end
 
     respond_to do |format|
-      format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
+      format.html { redirect_to employees_url }
       format.json { head :no_content }
     end
   end
@@ -68,7 +87,7 @@ class EmployeesController < ApplicationController
 private
 
   def set_employee
-    @employee = Employee.find(params[:id])
+    @employee = Employee.with_deleted.find(params[:id] || params[:employee_id])
   end
 
   def employee_params

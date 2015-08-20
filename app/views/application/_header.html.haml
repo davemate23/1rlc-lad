@@ -1,27 +1,49 @@
-%header.navbar.navbar-static-top.navbar-inverse
+%nav.navbar.navbar-static-top.navbar-inverse{ role: 'navigation' }
   .container
-    = link_to '1RLC LAD', '#', id: 'logo'
-    %nav
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to 'Home', root_path
-        %li= link_to 'Help', help_path
-        %li= link_to 'Employees', employees_path if can?(:index, Employee)
-        %li= link_to 'Roles', roles_path if can?(:index, Role)
+    = link_to '1RLC LAD', root_path, id: 'logo'
+    .navbar-header
+      %button.navbar-toggle{ type: 'button', data: { toggle: 'collapse', target: '.navbar-collapse' } }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
 
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right.messages
+        = header_link 'Home', root_path
+        = header_link 'Help', help_path
+        = header_link 'Statistics', statistics_path
+        = header_link 'Suggestion', new_employee_suggestion_path(current_employee) if current_employee.present?
+        = header_link 'Employees', employees_path if can?(:index, Employee)
+        = header_link 'Roles', roles_path if can?(:index, Role)
         - if current_employee.present?
           %li.dropdown
-            = link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do
+            = link_to '#', :class => "dropdown-toggle", :'data-toggle' => "dropdown" do
+              Resources
+              %b.caret
+            %ul.dropdown-menu
+              = header_link 'Announcements', employee_announcements_path(current_employee) if can? :index, Announcement
+              = header_link 'Suggestions', employee_suggestions_path(current_employee) if can? :index, Suggestion
+              = header_link 'Phones', employee_phones_path(current_employee) if can? :index, Phone
+              = header_link 'Addresses', employee_addresses_path(current_employee) if can? :index, Address
+              = header_link 'Competencies', employee_competencies_path(current_employee) if can? :index, Competency
+              = header_link 'Dependants', employee_dependants_path(current_employee) if can? :index, Dependant
+              = header_link 'Events', employee_events_path(current_employee) if can? :index, Event
+              = header_link 'Medical Records', employee_medical_records_path(current_employee) if can? :index, MedicalRecord
+              = header_link 'Next Of Kins', employee_next_of_kins_path(current_employee) if can? :index, NextOfKin
+              = header_link 'Notes', employee_notes_path(current_employee) if can? :index, Note
+              = header_link 'Promotion Dates', employee_promotion_dates_path(current_employee) if can? :index, PromotionDate
+              = header_link 'Qualifications', employee_qualifications_path(current_employee) if can? :index, Qualification
+              = header_link 'Reports', employee_reports_path(current_employee) if can? :index, Report
+              = header_link 'Trade Careers', employee_trade_careers_path(current_employee) if can? :index, TradeCareer
+
+          %li.dropdown
+            = link_to '#', :class => "dropdown-toggle", :'data-toggle' => "dropdown" do
               Account
               %b.caret
-
             %ul.dropdown-menu
-              %li= link_to 'Profile', current_employee
-              %li= link_to 'Settings', edit_employee_path(current_employee)
+              = header_link 'Profile', current_employee
+              = header_link 'Settings', edit_employee_path(current_employee)
               %li.divider
-              %li= link_to 'Log out', destroy_employee_session_path, method: :delete
+              = header_link 'Log out', destroy_employee_session_path, link: { method: :delete }
         - else
-          %li= link_to 'Log in', new_employee_session_path
-
-
-
-
+          = header_link 'Log in', new_employee_session_path

@@ -14,6 +14,7 @@ gem 'formtastic', '~> 3.0'
 gem 'formtastic-bootstrap'
 gem 'cocoon'
 gem 'country_select'
+gem 'ransack'
 gem 'cancancan', '~> 1.10'
 gem 'responders'
 # Use SCSS for stylesheets
@@ -34,14 +35,25 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', :group => :doc
 
+gem 'birthday'
 gem 'devise', '3.4.1'
 gem 'devise-bootstrap-views'
+gem 'devise_invitable'
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                                  :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+gem 'modernizr-rails'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
 gem 'unicorn'
+gem 'paranoia', '~> 2.0'
+gem 'chartkick'
+gem 'groupdate'
+gem 'airbrake'
+gem 'aws-sdk'
+
 
 group :development do
   gem 'letter_opener'

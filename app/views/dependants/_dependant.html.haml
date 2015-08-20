@@ -1,0 +1,14 @@
+%tr
+  %td= dependant.first_name
+  %td= dependant.last_name
+  %td= dependant.date_of_birth.strftime('%e %b %Y') if dependant.date_of_birth.present?
+  %td= dependant.gender
+  %td= dependant.relation
+  %td= dependant.anniversary
+  %td
+    - if can? :read, dependant
+      = link_to 'Show', [@parent, dependant]
+    - if can? :edit, dependant
+      = link_to 'Edit', edit_employee_dependant_path(@parent, dependant)
+    - if can? :destroy, dependant
+      = link_to 'Destroy', [@parent, dependant], method: :delete, data: { confirm: 'Are you sure?' }

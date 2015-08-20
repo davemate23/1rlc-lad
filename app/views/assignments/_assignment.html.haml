@@ -1,7 +1,7 @@
 %tr{ id: "assignment-#{assignment.id}" }
   %td= assignment.role.pid
-  %td= assignment.start_date
-  %td= assignment.end_date
+  %td= assignment.start_date.strftime('%e %b %Y') if assignment.start_date.present?
+  %td= assignment.end_date.strftime('%e %b %Y') if assignment.end_date.present?
   %td
     - if can? :edit, assignment
       = link_to 'Edit', edit_polymorphic_path([@parent, assignment])

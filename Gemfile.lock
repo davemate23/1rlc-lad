@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: 486f26e0c4cbbc6e55a1d8a477a550f5a6594a8d
+  specs:
+    bootstrap-datepicker-rails (1.4.0)
+      railties (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,10 +44,21 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    airbrake (4.3.0)
+      builder
+      multi_json
     arel (6.0.0)
+    aws-sdk (1.64.0)
+      aws-sdk-v1 (= 1.64.0)
+    aws-sdk-v1 (1.64.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    birthday (0.3.1)
+      activerecord
+      activesupport
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.10)
@@ -58,6 +76,7 @@ GEM
     capybara-screenshot (1.0.9)
       capybara (>= 1.0, < 3)
       launchy
+    chartkick (1.3.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -88,6 +107,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     devise-bootstrap-views (0.0.5)
+    devise_invitable (1.5.1)
+      actionmailer (>= 3.2.6, < 5)
+      devise (>= 3.2.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.5.2)
@@ -104,6 +126,8 @@ GEM
       formtastic (>= 3.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    groupdate (2.4.0)
+      activesupport (>= 3)
     haml (4.0.6)
       tilt
     haml-rails (0.9.0)
@@ -139,6 +163,7 @@ GEM
     mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.6.1)
+    modernizr-rails (2.7.1)
     multi_json (1.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -148,7 +173,11 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paranoia (2.1.3)
+      activerecord (~> 4.0)
     pg (0.18.2)
+    polyamorous (1.2.0)
+      activerecord (>= 3.0)
     rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -184,6 +213,12 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
+    ransack (1.6.6)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.2)
     rdoc (4.2.0)
       json (~> 1.4)
     responders (2.1.0)
@@ -259,32 +294,42 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
+  aws-sdk
   bcrypt (~> 3.1.7)
+  birthday
+  bootstrap-datepicker-rails!
   bootstrap-sass (= 3.2.0.0)
   bootstrap-will_paginate (= 0.0.10)
   byebug
   cancancan (~> 1.10)
   capybara
   capybara-screenshot
+  chartkick
   cocoon
   coffee-rails (~> 4.1.0)
   country_select
   database_cleaner
   devise (= 3.4.1)
   devise-bootstrap-views
+  devise_invitable
   factory_girl_rails
   figaro
   formtastic (~> 3.0)
   formtastic-bootstrap
+  groupdate
   haml-rails (~> 0.9)
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener
+  modernizr-rails
   paperclip
+  paranoia (~> 2.0)
   pg
   rack-timeout
   rails (= 4.2.0)
   rails_12factor (= 0.0.2)
+  ransack
   responders
   rspec-mocks (~> 3.2.1)
   rspec-rails (~> 3.0)

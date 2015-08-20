@@ -1,0 +1,5 @@
+%h1 New Suggestion
+= render 'form'
+
+- if can? :index, @parent.suggestions.build
+  = link_to 'Back', employee_suggestions_path(@parent)

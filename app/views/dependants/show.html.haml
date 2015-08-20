@@ -1,0 +1,18 @@
+%p
+  %strong First name: #{@dependant.first_name}
+%p
+  %strong Last name: #{@dependant.last_name}
+%p
+  %strong Date of birth: #{@dependant.date_of_birth.strftime('%e %b %Y') if @dependant.date_of_birth.present?}
+%p
+  %strong Gender: #{@dependant.gender}
+%p
+  %strong Gender: #{@dependant.relation}
+%p
+  %strong Anniversary: #{@dependant.anniversary}
+
+- if can? :edit, @dependant
+  = link_to 'Edit', edit_employee_dependant_path(@parent, @dependant)
+- if can? :index, @parent.dependants.build
+  |
+  = link_to 'Back', employee_dependants_path(@parent)

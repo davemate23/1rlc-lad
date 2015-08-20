@@ -6,7 +6,8 @@ class AddressesController < ApplicationController
   # GET /addresses
   # GET /addresses.json
   def index
-    @addresses = @parent.addresses
+    @search = Address.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /addresses/1

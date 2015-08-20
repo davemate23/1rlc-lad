@@ -2,11 +2,11 @@
   %td= competency.name
   %td= competency.competency_type
   %td= competency.grade
-  %td= competency.start_date
-  %td= competency.end_date
+  %td= competency.start_date.strftime('%e %b %Y') if competency.start_date.present?
+  %td= competency.end_date.strftime('%e %b %Y') if competency.end_date.present?
   %td
     - if can? :read, competency
-      = link_to 'Show', competency
+      = link_to 'Show', [@parent, competency]
     - if can? :edit, competency
       = link_to 'Edit', edit_employee_competency_path(@parent, competency)
     - if can? :destroy, competency

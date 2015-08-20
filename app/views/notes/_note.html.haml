@@ -1,6 +1,6 @@
 %tr
   %td= note.comment
-  %td= note.date
+  %td= note.date.strftime('%e %b %Y') if note.date.present?
   %td
     - if can? :read, note
       = link_to 'Show', [@parent, note]

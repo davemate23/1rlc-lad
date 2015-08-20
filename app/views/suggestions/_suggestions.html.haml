@@ -1,0 +1,13 @@
+%table.table
+  %thead
+    %tr
+      %th Employee
+      %th Title
+      %th Created at
+      %th Updated at
+      %th
+  %tbody
+    = render suggestions
+%br
+- if can? :create, @parent.suggestions.build
+  = link_to 'New Suggestion', new_employee_suggestion_path(@parent), class: 'btn btn-default'

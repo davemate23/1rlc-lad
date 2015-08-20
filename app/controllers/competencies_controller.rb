@@ -6,7 +6,8 @@ class CompetenciesController < ApplicationController
   # GET /competencies
   # GET /competencies.json
   def index
-    @competencies = @parent.competencies
+    @search = Competency.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /competencies/1

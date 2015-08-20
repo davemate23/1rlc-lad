@@ -1,14 +1,8 @@
 %h1 Listing Notes
-%table.table
-  %thead
-    %tr
-      %th Comment
-      %th Date
-      %th
-  %tbody
-    = render @notes
+= render 'shared/search/search', resourse_url: employee_notes_path(@parent), filters: [:created_at, :updated_at, :date], columns: ['employee', 'date', 'comment', 'created_at', 'updated_at']
 
 %br
 
 - if can? :create, @parent.notes.build
-  = link_to 'New Note', new_employee_note_path(@parent)
+  = link_to 'New Note', new_employee_note_path(@parent), class: 'btn btn-default'
+

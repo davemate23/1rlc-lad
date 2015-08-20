@@ -1,0 +1,8 @@
+%h1 Editing Dependant
+= render 'form'
+
+- if can? :read, @dependant
+  = link_to 'Show', [@parent, @dependant]
+- if can? :index, @parent.dependants.build
+  |
+  = link_to 'Back', employee_dependants_path(@parent)

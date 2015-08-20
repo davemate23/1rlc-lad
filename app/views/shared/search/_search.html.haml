@@ -1,0 +1,11 @@
+
+= search_form_for(@search, url: resourse_url, html: { method: :get, class: 'search-form form-inline' }) do |f|
+  .panel.panel-default
+    .panel-body
+      = render 'shared/search/filters', f: f, filters: filters
+      %p
+      = render 'shared/search/search_field', f: f
+      .form-group
+        = f.submit 'Search', class: 'btn'
+
+= render 'shared/search/results', columns: columns

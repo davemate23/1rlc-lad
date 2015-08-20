@@ -1,0 +1,16 @@
+%table.table
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th Date of birth
+      %th Gender
+      %th Relation
+      %th Anniversary
+      %th
+  %tbody
+    = render dependants
+
+%br
+- if can? :create, @parent.dependants.build
+  = link_to 'New Dependant', new_employee_dependant_path(@parent), class: 'btn btn-default'

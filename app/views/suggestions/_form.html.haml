@@ -1,0 +1,6 @@
+= semantic_form_for [@parent, @suggestion] do |f|
+  = f.inputs do
+    = f.input :title
+    = f.input :body, as: :text
+  = f.actions do
+    = f.action :submit

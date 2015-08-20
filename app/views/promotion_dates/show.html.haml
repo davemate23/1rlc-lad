@@ -1,0 +1,10 @@
+%p
+  %strong Date: #{@promotion_date.date.strftime('%e %b %Y') if @promotion_date.date.present?}
+%p
+  %strong Substantive rank: #{@promotion_date.substantive_rank}
+
+- if can? :edit, @promotion_date
+  = link_to 'Edit', edit_employee_promotion_date_path(@parent, @promotion_date)
+- if can? :index, @parent.promotion_dates.build
+  |
+  = link_to 'Back', employee_promotion_dates_path(@parent)

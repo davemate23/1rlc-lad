@@ -1,4 +1,6 @@
 - provide(:title, 'Home')
+= render 'admin_flashes'
+
 .center.jumbotron
   = link_to image_tag('1RLC.jpg', alt: '1 Regt RLC logo'), 'http://www.army.mod.uk/logistic/regiments/24861.aspx'
   %h1
@@ -6,7 +8,12 @@
     %br
     Light Aid Detachment
   %p This is the home page for 1 RLC LAD Personnel Management.
+
   - unless current_employee.present?
     = link_to 'Login Now!', new_employee_session_path, class: 'btn btn-lg btn-primary'
+  - else
+    = render 'events_timeline'
+  = render 'announcements'
+
 
 

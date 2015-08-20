@@ -1,9 +1,39 @@
 class Employee < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
+  acts_as_birthday :date_of_birth
 
-  devise :database_authenticatable, :recoverable, :rememberable,
-         :trackable, :validatable, :confirmable
+  attr_accessor :login
+
+  def self.default_scope
+    with_deleted
+  end
+
+  acts_as_paranoid
+
+  def active_for_authentication?
+    !deleted?
+  end
+
+  scope :activated, -> { where(activated: true) }
+  scope :with_age, -> { where.not(age: nil) }
+  scope :not_admin, -> { where.not(admin: true) }
+  scope :with_expired_passport, -> { where('passport_expiry <= ?', Date.today + 6.month) }
+
+  def login=(login)
+    @login = login
+  end
+
+  def login
+    @login || self.service_no || self.email
+  end
+
+  def next_away_event
+    events.away.where('start_date >= ?', Date.today).order('start_date').first
+  end
+
+  devise :invitable, :database_authenticatable, :recoverable, :rememberable,
+         :trackable, :validatable, authentication_keys: [:login]
 
 	validates :service_no, 		presence: true,
 								length: { minimum: 5 },
@@ -19,34 +49,65 @@ class Employee < ActiveRecord::Base
 	validates :password, length: { minimum: 6 }, allow_blank: true
 
   has_many :assignments
-  has_many :competencies
-	has_many :spouses
+	has_many :dependants
 	has_many :next_of_kins
 	has_many :phones
   has_many :events
-	has_many :qualifications
 	has_many :addresses
   has_many :notes
   has_many :reports
-  has_many :events
   has_many :trade_careers
   has_many :medical_records
   has_many :responsibilities
+  has_many :promotion_dates
+  has_many :suggestions
+  has_many :announcements
+  has_many :competencies
+  has_many :qualifications
 
-  has_attached_file :avatar, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
-  }
+  has_attached_file :avatar,
+                    styles: {
+                      thumb: '100x100>',
+                      square: '200x200#',
+                      medium: '300x300>'
+                    },
+                    storage: (Rails.env.production? ? :s3 : :filesystem),
+                    s3_credentials: Proc.new{|a| a.instance.s3_credentials }
+
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
-  def age
-     x = Date.today.year - date_of_birth.year
-     x -= 1 if Date.today < date_of_birth + x.years #for days before birthday
-  end
+  before_validation :set_age
+  before_validation :set_password
 
   def years_of_service
     Date.today.year - service_start_date.year
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["lower(service_no) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions.to_h).first
+    end
+  end
+
+  def s3_credentials
+    { bucket: ENV['AWS_BUCKET'], access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] }
+  end
+
+  private
+
+  def set_age
+    self.age = date_of_birth_age
+  end
+
+  def set_password
+    if self.new_record?
+      password = Devise.friendly_token.first(8)
+      self.password = password
+      self.password_confirmation = password
+    end
   end
 end

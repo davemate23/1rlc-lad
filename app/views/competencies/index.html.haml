@@ -1,16 +1,6 @@
 %h1 Listing Competencies
-%table.table
-  %thead
-    %tr
-      %th Name
-      %th Type
-      %th Grade
-      %th Start date
-      %th End date
-      %th
-  %tbody
-    = render @competencies
-
+= render 'shared/search/search', resourse_url: employee_competencies_path(@parent), filters: [:created_at, :updated_at, :start_date, :end_date, :competency_type, :grade], columns: ['employee', 'competency_type', 'grade', 'start_date', 'end_date']
 %br
 - if can? :create, @parent.competencies.build
-  = link_to 'New Competency', new_employee_competency_path(@parent)
+  = link_to 'New Competency', new_employee_competency_path(@parent), class: 'btn btn-default'
+

@@ -1,16 +1,6 @@
 %h1 Listing Next Of Kins
-%table.table
-  %thead
-    %tr
-      %th First name
-      %th Last name
-      %th Address
-      %th Contact number
-      %th Relation
-      %th
-  %tbody
-    = render @next_of_kins
-%br
+= render 'shared/search/search', resourse_url: employee_next_of_kins_path(@parent), filters: [:created_at, :updated_at], columns: ['employee', 'relation', 'full_name', 'contact_number', 'updated_at']
 
-- if can :create, @parent.next_of_kins.build
-  = link_to 'New Next of kin', new_employee_next_of_kin_path(@parent)
+%br
+- if can? :create, @parent.next_of_kins.build
+  = link_to 'New Next of kin', new_employee_next_of_kin_path(@parent), class: 'btn btn-default'

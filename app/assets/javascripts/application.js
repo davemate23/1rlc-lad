@@ -10,8 +10,18 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require modernizr
 //= require jquery
 //= require jquery_ujs
-//= require cocoon
 //= require bootstrap
 //= require turbolinks
+//= require bootstrap-datepicker
+//= require_tree .
+
+
+$(function(){
+  $('.date_picker input').datepicker({format: "dd/mm/yyyy"});
+})
+
+
+

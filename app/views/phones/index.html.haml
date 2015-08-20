@@ -1,15 +1,4 @@
 %h1 Listing Phones
-%table.table
-  %thead
-    %tr
-      %th Type
-      %th Name
-      %th Number
-      %th
-  %tbody
-    = render @phones
-
-%br
-
+= render 'shared/search/search', resourse_url: employee_phones_path(@parent), filters: [:created_at, :updated_at, :phone_type], columns: ['employee', 'phone_type', 'number', 'updated_at']
 - if can? :create, @parent.phones.build
-  = link_to 'New Phone', new_employee_phone_path(@parent)
+  = link_to 'New Phone', new_employee_phone_path(@parent), class: 'btn btn-default'

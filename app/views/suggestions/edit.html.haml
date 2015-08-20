@@ -1,0 +1,8 @@
+%h1 Editing Suggestion
+= render 'form'
+
+- if can? :read, @suggestion
+  = link_to 'Show', [@parent, @suggestion]
+- if can? :index, @parent.suggestions.build
+  |
+  = link_to 'Back', employee_suggestions_path(@parent)

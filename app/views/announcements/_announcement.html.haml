@@ -1,0 +1,12 @@
+%tr
+  %td= announcement.employee.try(:email)
+  %td= announcement.title
+  %td= announcement.created_at.strftime('%e %b %Y') if announcement.created_at.present?
+  %td= announcement.updated_at.strftime('%e %b %Y') if announcement.updated_at.present?
+  %td
+    - if can? :read, announcement
+      = link_to 'Show', [@parent, announcement]
+    - if can? :edit, announcement
+      = link_to 'Edit', edit_employee_announcement_path(@parent, announcement)
+    - if can? :destroy, announcement
+      = link_to 'Destroy', [@parent, announcement], method: :delete, data: { confirm: 'Are you sure?' }

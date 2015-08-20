@@ -1,0 +1,10 @@
+%tr
+  %td= promotion_date.substantive_rank
+  %td= promotion_date.date.strftime('%e %b %Y') if promotion_date.date.present?
+  %td
+    - if can? :read, promotion_date
+      = link_to 'Show', [@parent, promotion_date]
+    - if can? :edit, promotion_date
+      = link_to 'Edit', edit_employee_promotion_date_path(@parent, promotion_date)
+    - if can? :destroy, promotion_date
+      = link_to 'Destroy', [@parent, promotion_date], method: :delete, data: { confirm: 'Are you sure?' }

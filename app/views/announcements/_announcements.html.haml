@@ -1,0 +1,13 @@
+%table.table
+  %thead
+    %tr
+      %th Employee
+      %th Title
+      %th Created at
+      %th Updated at
+      %th
+  %tbody
+    = render announcements
+%br
+- if can? :create, @parent.announcements.build
+  = link_to 'New Announcement', new_employee_announcement_path(@parent), class: 'btn btn-default'

@@ -1,15 +1,7 @@
 %h1 Listing Qualifications
-%table.table
-  %thead
-    %tr
-      %th Title
-      %th Grade
-      %th End date
-      %th Status
-      %th School
-      %th
-  %tbody
-    = render @qualifications
+= render 'shared/search/search', resourse_url: employee_qualifications_path(@parent), filters: [:created_at, :updated_at, :end_date, :grade, :status, :school, :type], columns: ['employee', 'type', 'title', 'school', 'grade', 'end_date', 'status']
+
 %br
 - if can? :create, @parent.qualifications.build
-  = link_to 'New Qualification', new_employee_qualification_path(@parent)
+  = link_to 'New Qualification', new_employee_qualification_path(@parent), class: 'btn btn-default'
+

@@ -1,0 +1,6 @@
+- if can? :index, resource_class.new(employee: @employee)
+  .panel.panel-default.panel-primary
+    .panel-heading
+      %h4= title
+    .panel-body
+      = render partial_name, partial_params

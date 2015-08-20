@@ -1,0 +1,15 @@
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th Type
+      %th Grade
+      %th Start date
+      %th End date
+      %th
+  %tbody
+    = render competencies
+
+%br
+- if can? :create, @parent.competencies.build
+  = link_to 'New Competency', new_employee_competency_path(@parent), class: 'btn btn-default'

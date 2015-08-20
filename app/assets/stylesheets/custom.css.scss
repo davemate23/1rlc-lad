@@ -1,6 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+@import "bootstrap-datepicker";
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
@@ -30,6 +30,10 @@ textarea {
   h1 {
     margin-bottom: 10px;
   }
+}
+
+.form-inline input {
+  margin-bottom: 0;
 }
 
 /* typography */

@@ -1,0 +1,5 @@
+%h1 New Announcement
+= render 'form'
+
+- if can? :index, @parent.announcements.build
+  = link_to 'Back', employee_announcements_path(@parent)

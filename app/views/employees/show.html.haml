@@ -1,51 +1,52 @@
-
-.well.well-small.clearfix
-  .row
-    .col-md-2
-
-      %ul.list-group
-        %li.list-group-item
-          = image_tag @employee.avatar.url(:square)
+.row
+  .panel.panel-default.panel-primary
+    .panel-heading
+      = image_tag @employee.avatar.url(:thumb)
+      .pull-right
         - if can? :edit, @employee
-          %li.list-group-item
-            = link_to 'Edit', edit_employee_path(@employee), class: 'btn btn-default'
+          = link_to 'Edit', edit_employee_path(@employee), class: 'btn btn-default'
         - if can? :index, Assignment
-          %li.list-group-item
-            = link_to 'Assignments', employee_assignments_path(@employee), class: 'btn btn-default'
+          = link_to 'Assignments', employee_assignments_path(@employee), class: 'btn btn-default'
 
-    .col-md-4
-      %ul.list-group
-        %li.list-group-item Email: #{@employee.email}
-        %li.list-group-item Rank: #{@employee.substantive_rank}
-        %li.list-group-item Name: #{@employee.first_name} #{@employee.last_name}
-        %li.list-group-item Service Number: #{@employee.service_no}
-        %li.list-group-item Email: #{@employee.email}
-        %li.list-group-item Age: #{@employee.age}
+    %ul.list-group
+      %li.list-group-item Email: #{@employee.email}
+      %li.list-group-item Rank: #{@employee.substantive_rank}
+      %li.list-group-item Name: #{@employee.first_name} #{@employee.last_name}
+      %li.list-group-item Service Number: #{@employee.service_no}
+      %li.list-group-item Email: #{@employee.email}
+      %li.list-group-item Age: #{@employee.age}
+      - if @employee.next_away_event.present?
+        %li.list-group-item.alert.alert-danger I will be away from #{@employee.next_away_event.start_date.strftime('%d %b') if @employee.next_away_event.start_date.present?} for #{pluralize((@employee.next_away_event.end_date.to_date - @employee.next_away_event.start_date.to_date).to_i, 'day')}
 
-    .col-md-6
-      %ul.nav.nav-pills.nav-stacked
-        - if can? :index, @employee.addresses.build
-          %li= link_to 'Addresses', employee_addresses_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.competencies.build
-          %li= link_to 'Competencies', employee_competencies_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.medical_records.build
-          %li= link_to 'Medical Records', employee_medical_records_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.notes.build
-          %li= link_to 'Next Of Kins', employee_next_of_kins_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.notes.build
-          %li= link_to 'Notes', employee_notes_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.phones.build
-          %li= link_to 'Phones', employee_phones_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.qualifications.build
-          %li= link_to 'Qualifications', employee_qualifications_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.reports.build
-          %li= link_to 'Reports', employee_reports_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.spouses.build
-          %li= link_to 'Spouses', employee_spouses_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.trade_careers.build
-          %li= link_to 'Trade Careers', employee_trade_careers_path(@employee), class: 'btn btn-default'
-        - if can? :index, @employee.events.build
-          %li= link_to 'Events', employee_events_path(@employee), class: 'btn btn-default'
+    = line_chart [[@employee.service_start_date, 0]] + @employee.promotion_dates.with_deleted.map { |p| [p.date, p.rank_point] },
+                library: { vAxis: { title: 'Ranks' }, hAxis: { title: 'Date' } }    
+    %p
+      - PromotionDate::RANKS.each_with_index do |index, rank|
+        %span.label.label-default #{index} - #{rank}
+.row
+  = render 'resources', resource_class: Address, title: 'Addresses', partial_name: 'addresses/addresses', partial_params: { addresses: @employee.addresses }
+
+  = render 'resources', resource_class: Competency, title: 'Competencies', partial_name: 'competencies/competencies', partial_params: { competencies: @employee.competencies }
+
+  = render 'resources', resource_class: MedicalRecord, title: 'Medical Records', partial_name: 'medical_records/medical_records', partial_params: { medical_records: @employee.medical_records }
+
+  = render 'resources', resource_class: NextOfKin, title: 'Next Of Kins', partial_name: 'next_of_kins/next_of_kins', partial_params: { next_of_kins: @employee.next_of_kins }
+
+  = render 'resources', resource_class: Note, title: 'Notes', partial_name: 'notes/notes', partial_params: { notes: @employee.notes }
+
+  = render 'resources', resource_class: Phone, title: 'Phones', partial_name: 'phones/phones', partial_params: { phones: @employee.phones }
+
+  = render 'resources', resource_class: Qualification, title: 'Qualifications', partial_name: 'qualifications/qualifications', partial_params: { qualifications: @employee.qualifications }
+
+  = render 'resources', resource_class: Report, title: 'Reports', partial_name: 'reports/reports', partial_params: { reports: @employee.reports }
+
+  = render 'resources', resource_class: Dependant, title: 'Dependants', partial_name: 'dependants/dependants', partial_params: { dependants: @employee.dependants }
+
+  = render 'resources', resource_class: TradeCareer, title: 'Trade Careers', partial_name: 'trade_careers/trade_careers', partial_params: { trade_careers: @employee.trade_careers }
+
+  = render 'resources', resource_class: Event, title: 'Events', partial_name: 'events/events', partial_params: { events: @employee.events }
+
+  = render 'resources', resource_class: PromotionDate, title: 'Promotion dates', partial_name: 'promotion_dates/promotion_dates', partial_params: { promotion_dates: @employee.promotion_dates }
 
 .well.clearfix
-  %img.pull-right{:src => "http://kcdn3.klout.com/static/images/developers/dev-assets/powered-by-klout.png", :width => "150px"}/
+%img.pull-right{:src => "http://kcdn3.klout.com/static/images/developers/dev-assets/powered-by-klout.png", :width => "150px"}/

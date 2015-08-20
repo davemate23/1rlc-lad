@@ -6,5 +6,5 @@
       - if can? :edit, employee
         = link_to 'Edit', edit_employee_path(employee)
       - if can? :destroy, employee
-        = link_to 'Delete', employee, method: :delete, data: { confirm: "You sure?" }
+        = link_to employee.deleted? ? 'Activate' : 'Deactivate', employee, method: :delete, data: { confirm: "You sure?" }
 

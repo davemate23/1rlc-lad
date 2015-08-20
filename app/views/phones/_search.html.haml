@@ -1,0 +1,11 @@
+= search_form_for @search, url: employee_phones_path(@parent), method: :get, class: 'form-inline' do |f|
+  .form-group
+    = f.search_field :phone_type_or_name_or_number_cont, class: 'form-control'
+
+  .form-group
+    = f.submit class: 'btn' do
+      "Search"
+
+  .form-group
+    = link_to 'Reset', employee_phones_path(@parent), class: 'btn btn-primary'
+

@@ -6,7 +6,8 @@ class PhonesController < ApplicationController
   # GET /phones
   # GET /phones.json
   def index
-    @phones = @parent.phones
+    @search = Phone.search(params[:q])
+    @results = @search.result.includes(:employee)
   end
 
   # GET /phones/1

@@ -3,7 +3,7 @@
   = @note.comment
 %p
   %strong Date:
-  = @note.date
+  = @note.date.strftime('%e %b %Y') if @note.date.present?
 
 - if can? :edit, @note
   = link_to 'Edit', edit_employee_note_path(@parent, @note)
